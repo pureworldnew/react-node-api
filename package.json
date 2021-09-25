@@ -1,0 +1,17 @@
+{
+  "name": "react-node-boilerplate",
+  "version": "1.0.0",
+  "description": "react and node api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "cd ui-react && npm start",
+    "server": "node index.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
