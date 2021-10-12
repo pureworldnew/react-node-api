@@ -4,6 +4,8 @@
   "description": "react and node api",
   "main": "index.js",
   "scripts": {
+    "server:install": "npm install",
+    "client:install": "cd ui-react && npm install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "cd ui-react && npm start",
     "server": "node index.js",
