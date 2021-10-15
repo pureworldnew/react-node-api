@@ -1,11 +1,11 @@
 import React from "react";
-import { Typography } from "@mui/material";
+import { Heading } from "components/Heading";
 import { CustomSkeleton } from "components/CustomSkeleton";
 
 export const Project = () => {
   return (
     <div>
-      <Typography variant="h2">Project</Typography>
+      <Heading>Project</Heading>
       <CustomSkeleton />
     </div>
   );

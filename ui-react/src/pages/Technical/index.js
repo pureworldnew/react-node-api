@@ -1,12 +1,12 @@
 import React from "react";
-import { Typography } from "@mui/material";
 import { CollapsibleTable } from "components/CollapsibleTable";
 import { CustomTablePagination } from "components/CustomTablePagination";
+import { Heading } from "components/Heading";
 
 export const Technical = () => {
   return (
     <div>
-      <Typography variant="h2">Technical</Typography>
+      <Heading>Technical</Heading>
       <CollapsibleTable />
       <CustomTablePagination />
     </div>

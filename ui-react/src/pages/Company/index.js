@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { CustomModal } from "components/CustomModal";
+import { Heading } from "components/Heading";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -59,7 +59,7 @@ export const Company = () => {
         width: "100%",
       }}
     >
-      <Typography variant="h2">Company</Typography>
+      <Heading variant="h2">Company</Heading>
       <CustomModal />
       <DataGrid
         rows={rows}
