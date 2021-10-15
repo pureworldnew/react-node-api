@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
-  CircularProgress,
   Typography,
   Grid,
   List,
@@ -10,20 +9,6 @@ import {
   ListItemText,
 } from "@mui/material";
 import { ArrowForwardOutlined as ArrowForwardIcon } from "@mui/icons-material";
-import { makeStyles } from "@mui/styles";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    maxWidth: 752,
-  },
-  demo: {
-    backgroundColor: theme.palette.background.paper,
-  },
-  title: {
-    margin: theme.spacing(4, 0, 2),
-  },
-}));
 
 export const UserList = ({ users }) => {
   return (

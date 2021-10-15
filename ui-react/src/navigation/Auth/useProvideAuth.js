@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { getUserDetails } from "services/userServices";
 
 export function useProvideAuth() {

@@ -1,6 +1,6 @@
 // A wrapper for <Route> that redirects to the login
 
-import React, { createContext, useContext, useState } from "react";
+import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import { useAuth } from "./ProvideAuth";
 

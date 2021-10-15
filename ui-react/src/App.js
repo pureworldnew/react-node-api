@@ -3,16 +3,14 @@ import React, { useState } from "react";
 import "utils/dropConsole";
 // Styles
 import "@fontsource/roboto";
-import logo from "./assets/images/logo.svg";
-import { SharedComp, ComplexShared } from "./components";
+// import logo from "./assets/images/logo.svg";
+// import { SharedComp, ComplexShared } from "./components";
 // ROUTER
-import Home from "pages/Home";
 import { BrowserRouter } from "react-router-dom";
 import { RouterConfig } from "navigation/RouterConfig";
 // MUI Theme
-import { ThemeProvider, Button, createTheme } from "@mui/material";
-// import theme from "styles/muiTheme";
-import { Typography } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
+
 import { ThemeSwitch } from "components/ThemeSwitch";
 import { dark, light } from "styles/muiTheme";
 import { ProvideAuth } from "navigation/Auth/ProvideAuth";

@@ -3,7 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useAuth } from "./ProvideAuth";
 import { LinkRoute } from "components/LinkRoute";
 import { ROOT } from "navigation/CONSTANTS";
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import LoadingButton from "components/LoadingButton";
 
 export default function Login() {
