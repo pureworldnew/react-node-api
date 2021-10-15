@@ -22,7 +22,7 @@ export const UserList = ({ users }) => {
         <div>
           <List dense={false}>
             {users.map((user) => (
-              <ListItem key={user.id}>
+              <ListItem key={user.age}>
                 <ListItemIcon>
                   <ArrowForwardIcon color="primary" />
                 </ListItemIcon>

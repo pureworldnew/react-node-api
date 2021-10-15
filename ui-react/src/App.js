@@ -4,7 +4,7 @@ import "utils/dropConsole";
 // Styles
 import "@fontsource/roboto";
 // import logo from "./assets/images/logo.svg";
-// import { SharedComp, ComplexShared } from "./components";
+import { ComplexShared } from "./components";
 // ROUTER
 import { BrowserRouter } from "react-router-dom";
 import { RouterConfig } from "navigation/RouterConfig";
@@ -24,17 +24,17 @@ function App() {
 
   return (
     <ProvideAuth>
-      <div>
-        <ThemeProvider theme={darkState ? dark() : light()}>
-          <ThemeSwitch
-            darkState={darkState}
-            handleThemeChange={handleThemeChange}
-          />
-          <BrowserRouter>
+      <ThemeProvider theme={darkState ? dark() : light()}>
+        <ThemeSwitch
+          darkState={darkState}
+          handleThemeChange={handleThemeChange}
+        />
+        <BrowserRouter>
+          <ComplexShared>
             <RouterConfig />
-          </BrowserRouter>
-        </ThemeProvider>
-      </div>
+          </ComplexShared>
+        </BrowserRouter>
+      </ThemeProvider>
     </ProvideAuth>
   );
 }

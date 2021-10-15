@@ -9,7 +9,7 @@ export const AuthorizedPage1 = () => {
   return (
     <div>
       <Link to={ROOT}>Home</Link>
-      <Typography variant="h2">Welcome, {user.name}.</Typography>
+      <Typography variant="h2">Welcome, {user.firstName}.</Typography>
       <Typography variant="overline">Authorized Page 1</Typography>
     </div>
   );
