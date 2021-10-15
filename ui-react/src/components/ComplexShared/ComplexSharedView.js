@@ -16,8 +16,15 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import MailIcon from "@mui/icons-material/Mail";
+import ScheduleIcon from "@mui/icons-material/Schedule";
+import BusinessIcon from "@mui/icons-material/Business";
+import VideoCallIcon from "@mui/icons-material/VideoCall";
+import DoneIcon from "@mui/icons-material/Done";
+import PendingIcon from "@mui/icons-material/Pending";
+import AccountTreeIcon from "@mui/icons-material/AccountTree";
+import AppsIcon from "@mui/icons-material/Apps";
 
 import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
@@ -27,6 +34,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+
+import { NAVLIST, NAVPRIVATELIST } from "navigation/CONSTANTS";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -162,6 +172,14 @@ export default function ComplexSharedView({ children }) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -236,89 +254,109 @@ export default function ComplexSharedView({ children }) {
     </Menu>
   );
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  const renderAppBar = (
+    <AppBar position="fixed" open={open}>
+      <Toolbar>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerOpen}
+          edge="start"
+          sx={{
+            marginRight: "36px",
+            ...(open && { display: "none" }),
+          }}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" noWrap component="div">
+          Interview Management Tool
+        </Typography>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ "aria-label": "search" }}
+          />
+        </Search>
+        <Box sx={{ flexGrow: 1 }} />
+        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <IconButton
+            size="large"
+            aria-label="show 4 new mails"
+            color="inherit"
+          >
+            <Badge badgeContent={4} color="error">
+              <MailIcon />
+            </Badge>
+          </IconButton>
+          <IconButton
+            size="large"
+            aria-label="show 17 new notifications"
+            color="inherit"
+          >
+            <Badge badgeContent={17} color="error">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+          <IconButton
+            size="large"
+            edge="end"
+            aria-label="account of current user"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            onClick={handleProfileMenuOpen}
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+        </Box>
+        <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          <IconButton
+            size="large"
+            aria-label="show more"
+            aria-controls={mobileMenuId}
+            aria-haspopup="true"
+            onClick={handleMobileMenuOpen}
+            color="inherit"
+          >
+            <MoreIcon />
+          </IconButton>
+        </Box>
+      </Toolbar>
+    </AppBar>
+  );
 
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const renderIcons = (iconName) => {
+    switch (iconName) {
+      case "Schedule":
+        return <ScheduleIcon />;
+      case "Company":
+        return <BusinessIcon />;
+      case "Technical":
+        return <VideoCallIcon />;
+      case "Final":
+        return <DoneIcon />;
+      case "Offer":
+        return <PendingIcon />;
+      case "Project":
+        return <AccountTreeIcon />;
+      case "Home":
+        return <AppsIcon />;
+      case "Dashboard":
+        return <DashboardIcon />;
+      default:
+        <MailIcon />;
+        break;
+    }
   };
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: "36px",
-              ...(open && { display: "none" }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
+      {renderAppBar}
       {renderMobileMenu}
       {renderMenu}
       <Drawer variant="permanent" open={open}>
@@ -333,23 +371,19 @@ export default function ComplexSharedView({ children }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+          {NAVPRIVATELIST.map((value, index) => (
+            <ListItem button key={value.name} component={Link} to={value.route}>
+              <ListItemIcon>{renderIcons(value.name)}</ListItemIcon>
+              <ListItemText primary={value.name} />
             </ListItem>
           ))}
         </List>
         <Divider />
         <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+          {NAVLIST.map((value, index) => (
+            <ListItem button key={value.name} component={Link} to={value.route}>
+              <ListItemIcon>{renderIcons(value.name)}</ListItemIcon>
+              <ListItemText primary={value.name} />
             </ListItem>
           ))}
         </List>
