@@ -1,31 +1,43 @@
-import { useEffect, useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { useState } from "react";
+// Handle console logs
+import "utils/dropConsole";
+// Styles
+import "@fontsource/roboto";
+import logo from "./assets/images/logo.svg";
+import { SharedComp, ComplexShared } from "./components";
+// ROUTER
+import Home from "pages/Home";
+import { BrowserRouter } from "react-router-dom";
+import { RouterConfig } from "navigation/RouterConfig";
+// MUI Theme
+import { ThemeProvider, Button, createTheme } from "@mui/material";
+// import theme from "styles/muiTheme";
+import { Typography } from "@mui/material";
+import { ThemeSwitch } from "components/ThemeSwitch";
+import { dark, light } from "styles/muiTheme";
+import { ProvideAuth } from "navigation/Auth/ProvideAuth";
 
 function App() {
-  const [result, setResult] = useState("");
-  useEffect(() => {
-    return fetch("/api/hello")
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setResult(responseJson.message);
-      });
-  });
+  const [darkState, setDarkState] = useState(true);
+  const handleThemeChange = () => {
+    setDarkState(!darkState);
+    console.log("theme=", darkState ? "dark" : "light");
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{result}</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ProvideAuth>
+      <div>
+        <ThemeProvider theme={darkState ? dark() : light()}>
+          <ThemeSwitch
+            darkState={darkState}
+            handleThemeChange={handleThemeChange}
+          />
+          <BrowserRouter>
+            <RouterConfig />
+          </BrowserRouter>
+        </ThemeProvider>
+      </div>
+    </ProvideAuth>
   );
 }
 
