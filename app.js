@@ -20,12 +20,5 @@ app.get("/", (req, res) => {
   res.json({ message: "API is working properly" });
 });
 
-//Logic goes here
-// const User = require("./model/user");
-
-//Register
-app.post("/register", (req, res) => {});
-
-//Login
-app.post("/login", (req, res) => {});
+require("./routes/user.routes")(app);
 module.exports = app;
