@@ -15,9 +15,10 @@ module.exports = {
       "Users",
       [
         {
-          firstName: "Demo firstName",
-          lastName: "Demo LastName",
+          first_name: "Demo firstName",
+          last_name: "Demo LastName",
           email: "Demo Email",
+          password: "password",
           createdAt: new Date(),
           updatedAt: new Date(),
         },

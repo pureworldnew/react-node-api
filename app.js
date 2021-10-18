@@ -21,4 +21,5 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/user.routes")(app);
+require("./routes/auth.routes")(app);
 module.exports = app;
