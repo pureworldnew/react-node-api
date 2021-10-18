@@ -1,9 +1,7 @@
 const http = require("http");
 const app = require("./app");
+const { port } = require("./config/config");
 const server = http.createServer(app);
-
-const { API_PORT } = process.env;
-const port = process.env.PORT || 4001;
 
 // server listening
 
