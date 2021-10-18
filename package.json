@@ -15,9 +15,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "concurrently": "^6.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
-    "nodemon": "^2.0.13"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.11",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.2",
+    "nodemon": "^2.0.13",
+    "sequelize": "^6.7.0",
+    "sequelize-auto": "^0.8.4",
+    "sequelize-cli": "^6.2.0"
   }
 }

@@ -1,15 +1,12 @@
-const express = require("express");
-const app = express();
+const http = require("http");
+const app = require("./app");
+const server = http.createServer(app);
 
-//serve the react app files
-// app.use(express.static(`${__dirname}/ui-react/build`));
+const { API_PORT } = process.env;
+const port = process.env.PORT || 4001;
 
-app.get("/api/hello", (req, res) => {
-  res.json({ message: "Hello World!" });
-});
+// server listening
 
-const port = process.env.PORT || 3001;
-
-app.listen(port, () => {
-  console.log(`server running on http://localhost:${port}`);
+server.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
