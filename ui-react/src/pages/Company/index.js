@@ -6,48 +6,110 @@ import { Heading } from "components/Heading";
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
-    field: "firstName",
-    headerName: "First name",
+    field: "companyName",
+    headerName: "Name",
     width: 150,
     editable: true,
   },
   {
-    field: "lastName",
-    headerName: "Last name",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "age",
-    headerName: "Age",
+    field: "companySize",
+    headerName: "Size",
     type: "number",
-    width: 110,
+    width: 80,
     editable: true,
   },
   {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.getValue(params.id, "firstName") || ""} ${
-        params.getValue(params.id, "lastName") || ""
-      }`,
+    field: "companyLocation",
+    headerName: "Location",
+    width: 150,
+    editable: true,
   },
+  {
+    field: "jobRole",
+    headerName: "Role",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "jobType",
+    headerName: "Type",
+    width: 100,
+  },
+  {
+    field: "jobRating",
+    headerName: "Rating",
+    width: 100,
+  },
+  {
+    field: "jobHow",
+    headerName: "How",
+    width: 100,
+  },
+  {
+    field: "jobWhere",
+    headerName: "Where",
+    width: 100,
+    editable: true,
+  },
+  {
+    field: "requirements",
+    headerName: "Requirements",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "skills",
+    headerName: "Skills",
+    width: 210,
+    editable: true,
+  },
+  {
+    field: "account",
+    headerName: "Account",
+    width: 100,
+  },
+  {
+    field: "regDate",
+    headerName: "Date",
+    width: 100,
+  },
+  {
+    field: "weekday",
+    headerName: "weekday",
+    width: 100,
+  },
+  // {
+  //   field: "fullName",
+  //   headerName: "Full name",
+  //   description: "This column has a value getter and is not sortable.",
+  //   sortable: false,
+  //   width: 160,
+  //   valueGetter: (params) =>
+  //     `${params.getValue(params.id, "companySize") || ""} ${
+  //       params.getValue(params.id, "jobWhere") || ""
+  //     }`,
+  // },
 ];
 
-const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-];
+let rows = [];
+let arraySize = 10;
+while (arraySize--)
+  rows.push({
+    id: arraySize,
+    companySize: Math.floor(Math.random() * 101),
+    companyName: "Demo Company",
+    companyLocation: "Texas",
+    jobRole: "frontend developer",
+    jobType: arraySize % 2 ? "Contract" : "Full time",
+    jobRating: "150k",
+    requirements: "test job description",
+    skills: "React, Node, Javascript",
+    jobWhere: arraySize % 2 ? "Linkedin" : "Indeed",
+    jobHow: arraySize % 2 ? "Recruiter" : "job bid",
+    account: arraySize % 2 ? "China" : "US",
+    regDate: "2021-09-21",
+    weekday: "Monday",
+  });
 
 export const Company = () => {
   return (
