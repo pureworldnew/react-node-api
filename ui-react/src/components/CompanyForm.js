@@ -7,18 +7,16 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 
-import { Controller, useForm } from "react-hook-form";
-import { Grid, MenuItem, Paper, TextField } from "@mui/material";
-
+import { useForm } from "react-hook-form";
+import { Grid, MenuItem, Paper } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { FormInputText } from "./FormInputText";
 
+import { FormInputText } from "./FormInputText";
 import FormInputSelect from "./FormInputSelect";
+import FormInputDate from "./FormInputDate";
+import TypographyErrorShow from "./TypographyErrorShow";
 import {
   JOBHOWS,
   JOBROLES,
@@ -27,8 +25,6 @@ import {
   SOCIALACCOUNTS,
   WEEKDAYS,
 } from "navigation/CONSTANTS";
-import FormInputDate from "./FormInputDate";
-import TypographyErrorShow from "./TypographyErrorShow";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -66,7 +62,7 @@ const defaultValues = {
   regWeekday: "",
 };
 
-export const CustomModal = () => {
+export const CompanyForm = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
