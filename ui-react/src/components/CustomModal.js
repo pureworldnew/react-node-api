@@ -7,24 +7,28 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 
 import { Controller, useForm } from "react-hook-form";
-import {
-  FormControl,
-  Grid,
-  Input,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-  TextField,
-} from "@mui/material";
+import { Grid, MenuItem, Paper, TextField } from "@mui/material";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { FormInputText } from "./FormInputText";
 
-import { Box } from "@mui/system";
+import FormInputSelect from "./FormInputSelect";
+import {
+  JOBHOWS,
+  JOBROLES,
+  JOBTYPES,
+  JOBWHERES,
+  SOCIALACCOUNTS,
+  WEEKDAYS,
+} from "navigation/CONSTANTS";
+import FormInputDate from "./FormInputDate";
+import TypographyErrorShow from "./TypographyErrorShow";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -32,33 +36,33 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const schema = yup.object({
   companyName: yup.string().required(),
-  // companySize: yup.number().positive().integer().required(),
-  // companyLocation: yup.string().required(),
-  // jobRole: yup.string().required(),
-  // jobType: yup.string().required(),
-  // jobRating: yup.string().required(),
-  // jobHow: yup.string().required(),
-  // jobWhere: yup.string().required(),
-  // jobReq: yup.string().required(),
-  // jobSkills: yup.string().required(),
-  // socialAccount: yup.string().required(),
-  // regDate: yup.string().required(),
-  // regWeekday: yup.string().required(),
+  companySize: yup.number().positive().integer().required(),
+  companyLocation: yup.string().required(),
+  jobRole: yup.string().required(),
+  jobType: yup.string().required(),
+  jobRating: yup.string().required(),
+  jobHow: yup.string().required(),
+  jobWhere: yup.string().required(),
+  jobReq: yup.string().required(),
+  jobSkills: yup.string().required(),
+  socialAccount: yup.string().required(),
+  regDate: yup.string().required(),
+  regWeekday: yup.string().required(),
 });
 
 const defaultValues = {
   companySize: "",
   companyName: "",
   companyLocation: "",
-  jobRole: "",
-  jobType: "",
+  jobRole: "frontendDev",
+  jobType: "contract",
   jobRating: "",
-  jobHow: "",
-  jobWhere: "",
+  jobHow: "recruiter",
+  jobWhere: "linkedin",
   jobReq: "",
   jobSkills: "",
-  socialAccount: "",
-  regDate: "",
+  socialAccount: "usa",
+  regDate: new Date(),
   regWeekday: "",
 };
 
@@ -80,8 +84,6 @@ export const CustomModal = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema), defaultValues: defaultValues });
   const onSubmit = (data) => console.log(data);
-
-  // console.log(watch("companySize"));
 
   return (
     <div style={{ alignSelf: "end", marginBottom: "16px" }}>
@@ -129,7 +131,9 @@ export const CustomModal = () => {
                   label="Company Name"
                   fullWidth
                 />
-                <p>{errors.companyName?.message}</p>
+                <TypographyErrorShow>
+                  {errors.companyName?.message}
+                </TypographyErrorShow>
               </Grid>
               <Grid item xs={2}>
                 <FormInputText
@@ -138,7 +142,9 @@ export const CustomModal = () => {
                   label="Company Size"
                   fullWidth
                 />
-                <p>{errors.companySize?.message}</p>
+                <TypographyErrorShow>
+                  {errors.companySize?.message}
+                </TypographyErrorShow>
               </Grid>
               <Grid item xs={5}>
                 <FormInputText
@@ -147,25 +153,43 @@ export const CustomModal = () => {
                   label="Company Location"
                   fullWidth
                 />
-                <p>{errors.companyLocation?.message}</p>
+                <TypographyErrorShow>
+                  {errors.companyLocation?.message}
+                </TypographyErrorShow>
               </Grid>
               <Grid item xs={3}>
-                <FormInputText
-                  name={"jobRole"}
+                <FormInputSelect
+                  name="jobRole"
+                  label="Choose one Type of Role"
                   control={control}
-                  label="Role"
                   fullWidth
-                />
-                <p>{errors.jobRole?.message}</p>
+                >
+                  {JOBROLES.map((oneRole) => (
+                    <MenuItem key={oneRole.value} value={oneRole.value}>
+                      {oneRole.text}
+                    </MenuItem>
+                  ))}
+                </FormInputSelect>
+                <TypographyErrorShow>
+                  {errors.jobRole?.message}
+                </TypographyErrorShow>
               </Grid>
               <Grid item xs={3}>
-                <FormInputText
-                  name={"jobType"}
+                <FormInputSelect
+                  name="jobType"
+                  label="Choose one Job Type"
                   control={control}
-                  label="Type"
                   fullWidth
-                />
-                <p>{errors.jobType?.message}</p>
+                >
+                  {JOBTYPES.map((oneType) => (
+                    <MenuItem key={oneType.value} value={oneType.value}>
+                      {oneType.text}
+                    </MenuItem>
+                  ))}
+                </FormInputSelect>
+                <TypographyErrorShow>
+                  {errors.jobType?.message}
+                </TypographyErrorShow>
               </Grid>
               <Grid item xs={2}>
                 <FormInputText
@@ -174,25 +198,43 @@ export const CustomModal = () => {
                   label="Rating"
                   fullWidth
                 />
-                <p>{errors.jobRating?.message}</p>
+                <TypographyErrorShow>
+                  {errors.jobRating?.message}
+                </TypographyErrorShow>
               </Grid>
               <Grid item xs={2}>
-                <FormInputText
-                  name={"jobHow"}
+                <FormInputSelect
+                  name="jobHow"
+                  label="Choose one Job How"
                   control={control}
-                  label="How"
                   fullWidth
-                />
-                <p>{errors.jobHow?.message}</p>
+                >
+                  {JOBHOWS.map((oneHow) => (
+                    <MenuItem key={oneHow.value} value={oneHow.value}>
+                      {oneHow.text}
+                    </MenuItem>
+                  ))}
+                </FormInputSelect>
+                <TypographyErrorShow>
+                  {errors.jobHow?.message}
+                </TypographyErrorShow>
               </Grid>
               <Grid item xs={2}>
-                <FormInputText
-                  name={"jobWhere"}
+                <FormInputSelect
+                  name="jobWhere"
+                  label="Choose one Job Where"
                   control={control}
-                  label="Where"
                   fullWidth
-                />
-                <p>{errors.jobWhere?.message}</p>
+                >
+                  {JOBWHERES.map((oneWhere) => (
+                    <MenuItem key={oneWhere.value} value={oneWhere.value}>
+                      {oneWhere.text}
+                    </MenuItem>
+                  ))}
+                </FormInputSelect>
+                <TypographyErrorShow>
+                  {errors.jobWhere?.message}
+                </TypographyErrorShow>
               </Grid>
               <Grid item xs={8}>
                 <FormInputText
@@ -200,8 +242,11 @@ export const CustomModal = () => {
                   control={control}
                   label="Requirements"
                   fullWidth
+                  multiline
                 />
-                <p>{errors.jobReq?.message}</p>
+                <TypographyErrorShow>
+                  {errors.jobReq?.message}
+                </TypographyErrorShow>
               </Grid>
               <Grid item xs={4}>
                 <FormInputText
@@ -210,34 +255,54 @@ export const CustomModal = () => {
                   label="Skills"
                   fullWidth
                 />
-                <p>{errors.jobSkills?.message}</p>
+                <TypographyErrorShow>
+                  {errors.jobSkills?.message}
+                </TypographyErrorShow>
               </Grid>
               <Grid item xs={4}>
-                <FormInputText
-                  name={"socialAccount"}
+                <FormInputSelect
+                  name="socialAccount"
+                  label="Choose one account"
                   control={control}
-                  label="Account"
                   fullWidth
-                />
-                <p>{errors.socialAccount?.message}</p>
+                >
+                  {SOCIALACCOUNTS.map((oneSocial) => (
+                    <MenuItem key={oneSocial.value} value={oneSocial.value}>
+                      {oneSocial.text}
+                    </MenuItem>
+                  ))}
+                </FormInputSelect>
+                <TypographyErrorShow>
+                  {errors.socialAccount?.message}
+                </TypographyErrorShow>
               </Grid>
-              <Grid item xs={4}>
-                <FormInputText
-                  name={"regDate"}
+              <Grid item xs={4} sx={{ textAlign: "center" }}>
+                <FormInputDate
+                  name="regDate"
                   control={control}
                   label="Registration Date"
                   fullWidth
                 />
-                <p>{errors.regDate?.message}</p>
+                <TypographyErrorShow>
+                  {errors.regDate?.message}
+                </TypographyErrorShow>
               </Grid>
               <Grid item xs={4}>
-                <FormInputText
-                  name={"regWeekday"}
+                <FormInputSelect
+                  name="regWeekday"
+                  label="Choose one weekday"
                   control={control}
-                  label="Registration Weekday"
                   fullWidth
-                />
-                <p>{errors.regWeekday?.message}</p>
+                >
+                  {WEEKDAYS.map((oneWeekday) => (
+                    <MenuItem key={oneWeekday.value} value={oneWeekday.value}>
+                      {oneWeekday.text}
+                    </MenuItem>
+                  ))}
+                </FormInputSelect>
+                <TypographyErrorShow>
+                  {errors.regWeekday?.message}
+                </TypographyErrorShow>
               </Grid>
             </Grid>
           </Paper>

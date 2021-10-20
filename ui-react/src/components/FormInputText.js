@@ -8,6 +8,7 @@ export const FormInputText = ({
   defaultValue,
   label,
   fullWidth,
+  multiline,
 }) => {
   return (
     <Controller
@@ -15,7 +16,12 @@ export const FormInputText = ({
       control={control}
       defaultValue={defaultValue}
       render={({ field }) => (
-        <TextField {...field} label={label} fullWidth={fullWidth} />
+        <TextField
+          {...field}
+          label={label}
+          fullWidth={fullWidth}
+          multiline={multiline}
+        />
       )}
     />
   );
