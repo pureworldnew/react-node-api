@@ -52,19 +52,19 @@ const columns = [
     editable: true,
   },
   {
-    field: "requirements",
+    field: "jobReq",
     headerName: "Requirements",
     width: 150,
     editable: true,
   },
   {
-    field: "skills",
+    field: "jobSkills",
     headerName: "Skills",
     width: 210,
     editable: true,
   },
   {
-    field: "account",
+    field: "socialAccount",
     headerName: "Account",
     width: 100,
   },
@@ -74,7 +74,7 @@ const columns = [
     width: 100,
   },
   {
-    field: "weekday",
+    field: "regWeekday",
     headerName: "weekday",
     width: 100,
   },
@@ -102,13 +102,13 @@ while (arraySize--)
     jobRole: "frontend developer",
     jobType: arraySize % 2 ? "Contract" : "Full time",
     jobRating: "150k",
-    requirements: "test job description",
-    skills: "React, Node, Javascript",
+    jobReq: "test job description",
+    jobSkills: "React, Node, Javascript",
     jobWhere: arraySize % 2 ? "Linkedin" : "Indeed",
     jobHow: arraySize % 2 ? "Recruiter" : "job bid",
-    account: arraySize % 2 ? "China" : "US",
+    socialAccount: arraySize % 2 ? "China" : "US",
     regDate: "2021-09-21",
-    weekday: "Monday",
+    regWeekday: "Monday",
   });
 
 export const Company = () => {
