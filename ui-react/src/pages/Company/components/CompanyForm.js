@@ -13,10 +13,10 @@ import { Grid, MenuItem, Paper } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { FormInputText } from "../FormInputText";
-import FormInputSelect from "../FormInputSelect";
-import FormInputDate from "../FormInputDate";
-import TypographyErrorShow from "../TypographyErrorShow";
+import { FormInputText } from "components/FormInputText";
+import FormInputSelect from "components/FormInputSelect";
+import FormInputDate from "components/FormInputDate";
+import TypographyErrorShow from "components/TypographyErrorShow";
 import {
   JOBHOWS,
   JOBROLES,
@@ -62,7 +62,7 @@ const defaultValues = {
   regWeekday: "",
 };
 
-export const CompanyForm = () => {
+function CompanyForm() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -306,4 +306,6 @@ export const CompanyForm = () => {
       </Dialog>
     </div>
   );
-};
+}
+
+export default CompanyForm;
