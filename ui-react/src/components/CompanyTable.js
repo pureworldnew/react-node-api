@@ -1,4 +1,7 @@
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import { companyApi } from "services";
+import apiCompanies from "services/api/companies";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -109,9 +112,33 @@ while (arraySize--)
   });
 
 const CompanyTable = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    apiCompanies.getAll().then((res) => {
+      setLoading(false);
+      console.log(res);
+      setData(res);
+    });
+
+    return () => {
+      console.log("company Table axios cleanup");
+    };
+  }, []);
+
+  if (loading) {
+    return <div>Loading</div>;
+  }
+
+  if (error) {
+    return <div style={{ color: "red" }}>ERROR: {error}</div>;
+  }
+
   return (
     <DataGrid
-      rows={rows}
+      rows={data}
       columns={columns}
       pageSize={5}
       rowsPerPageOptions={[5]}

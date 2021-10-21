@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ROOT } from "navigation/CONSTANTS";
 import { UserList } from "./UserList";
 import { CircularProgress, Typography } from "@mui/material";
-import { getAllUsers } from "services/userServices";
+import { userApi } from "services";
 
 export const DashboardContainer = () => {
   const [users, setUsers] = useState([]);
@@ -12,18 +12,17 @@ export const DashboardContainer = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    getAllUsers()
+    userApi
+      .getAllUsers()
       .then((res) => {
         console.log("Dashboard > getAllUsers > res=", res);
         setUsers(res);
-        setIsLoading(false);
       })
       .catch((err) => {
         console.log("axios err=", err);
         setUsers([]);
-        setIsLoading(false);
       });
-
+    setIsLoading(false);
     return () => {
       console.log("axios cleanup.");
     };

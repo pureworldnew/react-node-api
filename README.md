@@ -8,6 +8,8 @@ npx sequelize-cli init
 
 npx sequelize-cli model:generate --name User --attributes first_name:string,last_name:string,email:string,password:string
 
+npx sequelize-cli model:generate --name Company --attributes company_size:string,company_name:string,company_location:string,job_role:string,job_type:string,job_rating:string,job_how:string,job_where:string,job_req:string,job_skills:string,social_account:string,reg_date:string,reg_weekday:string
+
 ## Run migrate
 
 npx sequelize-cli db:migrate
