@@ -1,7 +1,7 @@
 import * as React from "react";
-import { CompanyForm } from "components/CompanyForm";
+import { CompanyForm } from "components/Company/CompanyForm";
 import { Heading } from "components/Heading";
-import CompanyTable from "components/CompanyTable";
+import CompanyTable from "components/Company/CompanyTable";
 
 export const Company = () => {
   return (

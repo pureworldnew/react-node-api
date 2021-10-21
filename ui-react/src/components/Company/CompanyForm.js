@@ -13,10 +13,10 @@ import { Grid, MenuItem, Paper } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { FormInputText } from "./FormInputText";
-import FormInputSelect from "./FormInputSelect";
-import FormInputDate from "./FormInputDate";
-import TypographyErrorShow from "./TypographyErrorShow";
+import { FormInputText } from "../FormInputText";
+import FormInputSelect from "../FormInputSelect";
+import FormInputDate from "../FormInputDate";
+import TypographyErrorShow from "../TypographyErrorShow";
 import {
   JOBHOWS,
   JOBROLES,
