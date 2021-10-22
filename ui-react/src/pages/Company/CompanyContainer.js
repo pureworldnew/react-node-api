@@ -121,6 +121,7 @@ export function CompanyContainer() {
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
   const [delRows, setDelRows] = useState(null);
+
   useEffect(() => {
     getData()
       .then((res) => {

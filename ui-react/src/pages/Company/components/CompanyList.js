@@ -11,13 +11,7 @@ const CompanyList = ({ loading, error, data, columns, setDeletedRows }) => {
   }
 
   const handleRowSelection = (ids) => {
-    // setDeletedRows([...deletedRows, ...rows.filter((r) => r.id === e.data.id)]);
-    // console.log(e.data.id);
     setDeletedRows(ids);
-    // const selectedIDs = new Set(ids);
-    // const selectedRowData = data.filter((row) =>
-    //   selectedIDs.has(row.id.toString())
-    // );
   };
   return (
     <DataGrid
