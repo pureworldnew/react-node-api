@@ -119,7 +119,8 @@ export function CompanyContainer() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [delRows, setDelRows] = useState(null);
   useEffect(() => {
     getData()
       .then((res) => {
@@ -151,6 +152,23 @@ export function CompanyContainer() {
       .catch((error) => setError(error));
   };
 
+  const handleClickDelete = () => {
+    console.log("click delete method", typeof delRows);
+    apiCompanies.remove(delRows[0]).then((res) => {
+      console.log(res);
+      getData()
+        .then((res) => {
+          setLoading(false);
+          setData(res);
+        })
+        .catch((error) => setError(error));
+    });
+  };
+
+  const setDeletedRows = (ids) => {
+    setDelRows(ids);
+  };
+
   return (
     <CompanyView
       loading={loading}
@@ -162,6 +180,8 @@ export function CompanyContainer() {
       setOpen={setOpen}
       companySchema={companySchema}
       defaultCompanyValues={defaultCompanyValues}
+      handleClickDelete={handleClickDelete}
+      setDeletedRows={setDeletedRows}
     />
   );
 }

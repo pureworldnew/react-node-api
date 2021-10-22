@@ -35,6 +35,7 @@ const CompanyForm = ({
   setOpen,
   companySchema,
   defaultCompanyValues,
+  handleClickDelete,
 }) => {
   console.log("rendering CompanyForm");
 
@@ -61,8 +62,11 @@ const CompanyForm = ({
 
   return (
     <div style={{ alignSelf: "end", marginBottom: "16px" }}>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen} sx={{ mr: 2 }}>
         Add New
+      </Button>
+      <Button variant="outlined" onClick={handleClickDelete}>
+        Delete Rows
       </Button>
       <Dialog
         fullScreen

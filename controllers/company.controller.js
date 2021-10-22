@@ -112,7 +112,7 @@ exports.update = (req, res) => {
 // Delete a Company with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
-
+  console.log("id is here", id);
   Company.destroy({
     where: { id: id },
   })

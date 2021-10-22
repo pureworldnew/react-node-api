@@ -15,6 +15,8 @@ const CompanyView = ({
   setOpen,
   companySchema,
   defaultCompanyValues,
+  handleClickDelete,
+  setDeletedRows,
 }) => {
   return (
     <div
@@ -32,12 +34,14 @@ const CompanyView = ({
         setOpen={setOpen}
         companySchema={companySchema}
         defaultCompanyValues={defaultCompanyValues}
+        handleClickDelete={handleClickDelete}
       />
       <CompanyList
         loading={loading}
         error={error}
         data={data}
         columns={columns}
+        setDeletedRows={setDeletedRows}
       />
     </div>
   );

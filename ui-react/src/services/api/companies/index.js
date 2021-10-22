@@ -8,7 +8,7 @@ const apiCompanies = new ApiCore({
   post: true,
   put: false,
   patch: true,
-  delete: false,
+  remove: true,
   url: url,
 });
 

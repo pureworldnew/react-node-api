@@ -51,7 +51,7 @@ const patch = (resource, model) => {
 /**@param {string} id */
 const remove = (resource, id) => {
   return axios
-    .delete(`${BASE_URL}/${resource}`, id)
+    .delete(`${BASE_URL}/${resource}/${id}`)
     .then(handleResponse)
     .catch(handleError);
 };
