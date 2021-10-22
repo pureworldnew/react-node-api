@@ -1,9 +1,21 @@
-import React from "react";
+import React, { memo } from "react";
 import CompanyForm from "pages/Company/components/CompanyForm";
-import CompanyTable from "pages/Company/components/CompanyTable";
+import CompanyList from "pages/Company/components/CompanyList";
 import { Heading } from "components/Heading";
 
-const CompanyView = ({ loading, error, data, columns }) => {
+const MemoCompanyForm = memo(CompanyForm);
+
+const CompanyView = ({
+  loading,
+  error,
+  data,
+  columns,
+  saveCompany,
+  open,
+  setOpen,
+  companySchema,
+  defaultCompanyValues,
+}) => {
   return (
     <div
       style={{
@@ -14,8 +26,14 @@ const CompanyView = ({ loading, error, data, columns }) => {
       }}
     >
       <Heading>Company</Heading>
-      <CompanyForm />
-      <CompanyTable
+      <MemoCompanyForm
+        saveCompany={saveCompany}
+        open={open}
+        setOpen={setOpen}
+        companySchema={companySchema}
+        defaultCompanyValues={defaultCompanyValues}
+      />
+      <CompanyList
         loading={loading}
         error={error}
         data={data}

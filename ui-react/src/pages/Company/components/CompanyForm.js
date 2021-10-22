@@ -11,7 +11,6 @@ import Slide from "@mui/material/Slide";
 import { useForm } from "react-hook-form";
 import { Grid, MenuItem, Paper } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 
 import { FormInputText } from "components/FormInputText";
 import FormInputSelect from "components/FormInputSelect";
@@ -30,40 +29,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const schema = yup.object({
-  companyName: yup.string().required(),
-  companySize: yup.number().positive().integer().required(),
-  companyLocation: yup.string().required(),
-  jobRole: yup.string().required(),
-  jobType: yup.string().required(),
-  jobRating: yup.string().required(),
-  jobHow: yup.string().required(),
-  jobWhere: yup.string().required(),
-  jobReq: yup.string().required(),
-  jobSkills: yup.string().required(),
-  socialAccount: yup.string().required(),
-  regDate: yup.string().required(),
-  regWeekday: yup.string().required(),
-});
-
-const defaultValues = {
-  companySize: "",
-  companyName: "",
-  companyLocation: "",
-  jobRole: "frontendDev",
-  jobType: "contract",
-  jobRating: "",
-  jobHow: "recruiter",
-  jobWhere: "linkedin",
-  jobReq: "",
-  jobSkills: "",
-  socialAccount: "usa",
-  regDate: new Date(),
-  regWeekday: "",
-};
-
-const CompanyForm = () => {
-  const [open, setOpen] = React.useState(false);
+const CompanyForm = ({
+  saveCompany,
+  open,
+  setOpen,
+  companySchema,
+  defaultCompanyValues,
+}) => {
+  console.log("rendering CompanyForm");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -78,8 +51,13 @@ const CompanyForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema), defaultValues: defaultValues });
-  const onSubmit = (data) => console.log(data);
+  } = useForm({
+    resolver: yupResolver(companySchema),
+    defaultValues: defaultCompanyValues,
+  });
+  const onSubmit = (data) => {
+    saveCompany(data);
+  };
 
   return (
     <div style={{ alignSelf: "end", marginBottom: "16px" }}>

@@ -1,7 +1,7 @@
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 
-const CompanyTable = ({ loading, error, data, columns }) => {
+const CompanyList = ({ loading, error, data, columns }) => {
   if (loading) {
     return <div>Loading</div>;
   }
@@ -13,12 +13,12 @@ const CompanyTable = ({ loading, error, data, columns }) => {
     <DataGrid
       rows={data}
       columns={columns}
-      pageSize={5}
-      rowsPerPageOptions={[5]}
+      pageSize={10}
+      rowsPerPageOptions={[10]}
       checkboxSelection
       disableSelectionOnClick
     />
   );
 };
 
-export default CompanyTable;
+export default CompanyList;
