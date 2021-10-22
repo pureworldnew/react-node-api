@@ -62,7 +62,7 @@ const defaultValues = {
   regWeekday: "",
 };
 
-function CompanyForm() {
+const CompanyForm = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -306,6 +306,6 @@ function CompanyForm() {
       </Dialog>
     </div>
   );
-}
+};
 
 export default CompanyForm;

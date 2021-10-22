@@ -3,7 +3,7 @@ import CompanyForm from "pages/Company/components/CompanyForm";
 import CompanyTable from "pages/Company/components/CompanyTable";
 import { Heading } from "components/Heading";
 
-const CompanyView = () => {
+const CompanyView = ({ loading, error, data, columns }) => {
   return (
     <div
       style={{
@@ -15,7 +15,12 @@ const CompanyView = () => {
     >
       <Heading>Company</Heading>
       <CompanyForm />
-      <CompanyTable />
+      <CompanyTable
+        loading={loading}
+        error={error}
+        data={data}
+        columns={columns}
+      />
     </div>
   );
 };
