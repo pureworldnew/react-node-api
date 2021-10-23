@@ -36,6 +36,9 @@ const CompanyForm = ({
   companySchema,
   defaultCompanyValues,
   handleClickDelete,
+  handleClickEdit,
+  disableEditBtn,
+  disableDeleteBtn,
 }) => {
   console.log("rendering CompanyForm");
 
@@ -59,13 +62,25 @@ const CompanyForm = ({
   const onSubmit = (data) => {
     saveCompany(data);
   };
-
+  console.log("disableEditBtn", disableEditBtn);
   return (
     <div style={{ alignSelf: "end", marginBottom: "16px" }}>
       <Button variant="outlined" onClick={handleClickOpen} sx={{ mr: 2 }}>
         Add New
       </Button>
-      <Button variant="outlined" onClick={handleClickDelete}>
+      <Button
+        variant="outlined"
+        onClick={handleClickEdit}
+        sx={{ mr: 2 }}
+        disabled={disableEditBtn}
+      >
+        Edit Row
+      </Button>
+      <Button
+        variant="outlined"
+        onClick={handleClickDelete}
+        disabled={disableDeleteBtn}
+      >
         Delete Rows
       </Button>
       <Dialog

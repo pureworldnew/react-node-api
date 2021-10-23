@@ -1,7 +1,7 @@
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 
-const CompanyList = ({ loading, error, data, columns, setDeletedRows }) => {
+const CompanyList = ({ loading, error, data, columns, setSelectedRows }) => {
   if (loading) {
     return <div>Loading</div>;
   }
@@ -11,7 +11,7 @@ const CompanyList = ({ loading, error, data, columns, setDeletedRows }) => {
   }
 
   const handleRowSelection = (ids) => {
-    setDeletedRows(ids);
+    setSelectedRows(ids);
   };
   return (
     <DataGrid

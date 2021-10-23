@@ -120,7 +120,9 @@ export function CompanyContainer() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
-  const [delRows, setDelRows] = useState(null);
+  const [disableEditBtn, setDisableEditBtn] = useState(true);
+  const [disableDeleteBtn, setDisableDeleteBtn] = useState(true);
+  const [selectedIds, setSelectedIds] = useState(null);
 
   useEffect(() => {
     getData()
@@ -153,7 +155,7 @@ export function CompanyContainer() {
   };
 
   const handleClickDelete = () => {
-    if (delRows.length === data.length) {
+    if (selectedIds.length === data.length) {
       apiCompanies.removeAll("All").then((res) => {
         console.log(res);
         getData()
@@ -164,7 +166,7 @@ export function CompanyContainer() {
           .catch((error) => setError(error));
       });
     }
-    apiCompanies.remove(delRows).then((res) => {
+    apiCompanies.remove(selectedIds).then((res) => {
       console.log(res);
       getData()
         .then((res) => {
@@ -175,8 +177,10 @@ export function CompanyContainer() {
     });
   };
 
-  const setDeletedRows = (ids) => {
-    setDelRows(ids);
+  const setSelectedRows = (ids) => {
+    setSelectedIds(ids);
+    ids.length === 1 ? setDisableEditBtn(false) : setDisableEditBtn(true);
+    ids.length >= 1 ? setDisableDeleteBtn(false) : setDisableDeleteBtn(true);
   };
 
   return (
@@ -191,7 +195,9 @@ export function CompanyContainer() {
       companySchema={companySchema}
       defaultCompanyValues={defaultCompanyValues}
       handleClickDelete={handleClickDelete}
-      setDeletedRows={setDeletedRows}
+      setSelectedRows={setSelectedRows}
+      disableEditBtn={disableEditBtn}
+      disableDeleteBtn={disableDeleteBtn}
     />
   );
 }

@@ -16,7 +16,9 @@ const CompanyView = ({
   companySchema,
   defaultCompanyValues,
   handleClickDelete,
-  setDeletedRows,
+  setSelectedRows,
+  disableEditBtn,
+  disableDeleteBtn,
 }) => {
   return (
     <div
@@ -35,13 +37,15 @@ const CompanyView = ({
         companySchema={companySchema}
         defaultCompanyValues={defaultCompanyValues}
         handleClickDelete={handleClickDelete}
+        disableEditBtn={disableEditBtn}
+        disableDeleteBtn={disableDeleteBtn}
       />
       <CompanyList
         loading={loading}
         error={error}
         data={data}
         columns={columns}
-        setDeletedRows={setDeletedRows}
+        setSelectedRows={setSelectedRows}
       />
     </div>
   );
