@@ -48,10 +48,19 @@ const patch = (resource, model) => {
 };
 
 /**@param {string} resource */
-/**@param {string} id */
-const remove = (resource, id) => {
+/**@param {string} ids */
+const remove = (resource, ids) => {
   return axios
-    .delete(`${BASE_URL}/${resource}/${id}`)
+    .delete(`${BASE_URL}/${resource}`, { data: { ids: ids } })
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+/**@param {string} resource */
+/**@param {string} ids */
+const removeAll = (resource, ids) => {
+  return axios
+    .delete(`${BASE_URL}/${resource}`, { data: { ids: ids } })
     .then(handleResponse)
     .catch(handleError);
 };
@@ -63,4 +72,5 @@ export const apiProvider = {
   put,
   patch,
   remove,
+  removeAll,
 };

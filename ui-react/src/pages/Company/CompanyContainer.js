@@ -137,7 +137,6 @@ export function CompanyContainer() {
   }, []);
 
   const saveCompany = (data) => {
-    console.log("save company data", data);
     apiCompanies
       .post(data)
       .then((res) => {
@@ -154,8 +153,18 @@ export function CompanyContainer() {
   };
 
   const handleClickDelete = () => {
-    console.log("click delete method", typeof delRows);
-    apiCompanies.remove(delRows[0]).then((res) => {
+    if (delRows.length === data.length) {
+      apiCompanies.removeAll("All").then((res) => {
+        console.log(res);
+        getData()
+          .then((res) => {
+            setLoading(false);
+            setData(res);
+          })
+          .catch((error) => setError(error));
+      });
+    }
+    apiCompanies.remove(delRows).then((res) => {
       console.log(res);
       getData()
         .then((res) => {

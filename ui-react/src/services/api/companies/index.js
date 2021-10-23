@@ -9,10 +9,11 @@ const apiCompanies = new ApiCore({
   put: false,
   patch: true,
   remove: true,
+  removeAll: true,
   url: url,
 });
 
-apiCompanies.massUpdate = () => {
+apiCompanies.customAPI = () => {
   //Add custom api call logic here
 };
 

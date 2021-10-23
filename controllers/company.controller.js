@@ -135,18 +135,32 @@ exports.delete = (req, res) => {
 };
 
 // Delete all Companys from the database
-exports.deleteAll = (req, res) => {
-  Company.destroy({
-    where: {},
-    truncate: false,
-  })
-    .then((nums) => {
-      res.send({ message: `${nums} Companys were deleted successfully!` });
+exports.deleteSelected = (req, res) => {
+  const ids = req.body.ids;
+  if (ids == "All") {
+    Company.destroy({
+      where: {},
+      truncate: false,
     })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while removing all Companys!",
+      .then((nums) => {
+        res.send({ message: `${nums} Companys were deleted successfully!` });
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while removing all Companys!",
+        });
       });
-    });
+  } else {
+    Company.destroy({ where: { id: ids } })
+      .then((nums) => {
+        res.send({ message: `${nums} Companys were deleted successfully!` });
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while removing all Companys!",
+        });
+      });
+  }
 };
