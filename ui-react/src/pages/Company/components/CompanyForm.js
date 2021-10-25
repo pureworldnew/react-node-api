@@ -30,28 +30,24 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const CompanyForm = ({
-  saveCompany,
+  handleClickSave,
   open,
   setOpen,
+  modalFlag,
   companySchema,
   defaultCompanyValues,
   handleClickDelete,
-  handleClickEdit,
+  handleClickUpdate,
+  handleClickAddOpen,
+  handleClickEditOpen,
   disableEditBtn,
   disableDeleteBtn,
+  selectedEditValue,
 }) => {
-  console.log("rendering CompanyForm");
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+  console.log("default  model  company values", selectedEditValue);
   const {
     control,
+    setValue,
     handleSubmit,
     reset,
     formState: { errors },
@@ -59,18 +55,57 @@ const CompanyForm = ({
     resolver: yupResolver(companySchema),
     defaultValues: defaultCompanyValues,
   });
-  const onSubmit = (data) => {
-    saveCompany(data);
+  React.useEffect(() => {
+    if (Object.keys(selectedEditValue).length > 0 && open) {
+      setValue("companyLocation", selectedEditValue.companyLocation);
+      setValue("companyName", selectedEditValue.companyName);
+      setValue("companySize", selectedEditValue.companySize);
+      setValue("jobHow", selectedEditValue.jobHow);
+      setValue("jobRating", selectedEditValue.jobRating);
+      setValue("jobReq", selectedEditValue.jobReq);
+      setValue("jobRole", selectedEditValue.jobRole);
+      setValue("jobSkills", selectedEditValue.jobSkills);
+      setValue("jobType", selectedEditValue.jobType);
+      setValue("jobWhere", selectedEditValue.jobWhere);
+      setValue("regDate", selectedEditValue.regDate);
+      setValue("regWeekday", selectedEditValue.regWeekday);
+      setValue("socialAccount", selectedEditValue.socialAccount);
+    } else {
+      setValue("companyLocation", defaultCompanyValues.companyLocation);
+      setValue("companyName", defaultCompanyValues.companyName);
+      setValue("companySize", defaultCompanyValues.companySize);
+      setValue("jobHow", defaultCompanyValues.jobHow);
+      setValue("jobRating", defaultCompanyValues.jobRating);
+      setValue("jobReq", defaultCompanyValues.jobReq);
+      setValue("jobRole", defaultCompanyValues.jobRole);
+      setValue("jobSkills", defaultCompanyValues.jobSkills);
+      setValue("jobType", defaultCompanyValues.jobType);
+      setValue("jobWhere", defaultCompanyValues.jobWhere);
+      setValue("regDate", defaultCompanyValues.regDate);
+      setValue("regWeekday", defaultCompanyValues.regWeekday);
+      setValue("socialAccount", defaultCompanyValues.socialAccount);
+    }
+  }, [selectedEditValue, open, setValue, defaultCompanyValues]);
+
+  const handleClose = () => {
+    setOpen(false);
   };
-  console.log("disableEditBtn", disableEditBtn);
+
+  const onSubmit = (data) => {
+    if (Object.keys(selectedEditValue).length > 0 && modalFlag === "update") {
+      handleClickUpdate(selectedEditValue.id, data);
+    } else {
+      handleClickSave(data);
+    }
+  };
   return (
     <div style={{ alignSelf: "end", marginBottom: "16px" }}>
-      <Button variant="outlined" onClick={handleClickOpen} sx={{ mr: 2 }}>
+      <Button variant="outlined" onClick={handleClickAddOpen} sx={{ mr: 2 }}>
         Add New
       </Button>
       <Button
         variant="outlined"
-        onClick={handleClickEdit}
+        onClick={handleClickEditOpen}
         sx={{ mr: 2 }}
         disabled={disableEditBtn}
       >

@@ -1,5 +1,5 @@
 import React from "react";
-import { CustomSkeleton } from "components/CustomSkeleton";
+import CustomSkeleton from "components/CustomSkeleton";
 import { Heading } from "components/Heading";
 
 export const Schedule = () => {

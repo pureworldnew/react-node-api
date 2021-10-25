@@ -1,9 +1,10 @@
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import CustomSkeleton from "components/CustomSkeleton";
 
 const CompanyList = ({ loading, error, data, columns, setSelectedRows }) => {
   if (loading) {
-    return <div>Loading</div>;
+    return <CustomSkeleton />;
   }
 
   if (error) {

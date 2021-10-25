@@ -2,7 +2,7 @@ import * as React from "react";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 
-export const CustomSkeleton = () => {
+const CustomSkeleton = () => {
   return (
     <Stack spacing={1}>
       <Skeleton variant="text" />
@@ -11,3 +11,5 @@ export const CustomSkeleton = () => {
     </Stack>
   );
 };
+
+export default CustomSkeleton;

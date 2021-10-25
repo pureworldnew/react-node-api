@@ -120,15 +120,16 @@ export function CompanyContainer() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
+  const [modalFlag, setModalFlag] = useState("");
   const [disableEditBtn, setDisableEditBtn] = useState(true);
   const [disableDeleteBtn, setDisableDeleteBtn] = useState(true);
   const [selectedIds, setSelectedIds] = useState(null);
+  const [selectedEditValue, setSelectedEditValue] = useState({});
 
   useEffect(() => {
     getData()
       .then((res) => {
         setLoading(false);
-        console.log(res);
         setData(res);
       })
       .catch((error) => setError(error));
@@ -138,7 +139,7 @@ export function CompanyContainer() {
     };
   }, []);
 
-  const saveCompany = (data) => {
+  const handleClickSave = (data) => {
     apiCompanies
       .post(data)
       .then((res) => {
@@ -152,6 +153,39 @@ export function CompanyContainer() {
           .catch((error) => setError(error));
       })
       .catch((error) => setError(error));
+  };
+
+  const handleClickEditOpen = () => {
+    apiCompanies
+      .getSingle(selectedIds)
+      .then((res) => {
+        setOpen(true);
+        setModalFlag("update");
+        setSelectedEditValue(res);
+      })
+      .catch((error) => setError(error));
+  };
+  const handleClickAddOpen = () => {
+    setModalFlag("add");
+    // setSelectedIds(null);
+    setSelectedEditValue({});
+    setOpen(true);
+  };
+
+  const handleClickUpdate = (id, data) => {
+    apiCompanies
+      .put(id, data)
+      .then((res) => {
+        console.log(res);
+        getData()
+          .then((res) => {
+            setOpen(false);
+            setLoading(false);
+            setData(res);
+          })
+          .catch((error) => setError(error));
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleClickDelete = () => {
@@ -189,15 +223,20 @@ export function CompanyContainer() {
       error={error}
       data={data}
       columns={columns}
-      saveCompany={saveCompany}
+      handleClickSave={handleClickSave}
+      handleClickAddOpen={handleClickAddOpen}
+      handleClickEditOpen={handleClickEditOpen}
+      handleClickUpdate={handleClickUpdate}
       open={open}
       setOpen={setOpen}
+      modalFlag={modalFlag}
       companySchema={companySchema}
       defaultCompanyValues={defaultCompanyValues}
       handleClickDelete={handleClickDelete}
       setSelectedRows={setSelectedRows}
       disableEditBtn={disableEditBtn}
       disableDeleteBtn={disableDeleteBtn}
+      selectedEditValue={selectedEditValue}
     />
   );
 }

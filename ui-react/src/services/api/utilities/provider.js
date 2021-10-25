@@ -31,9 +31,9 @@ const post = (resource, model) => {
 
 /**@param {string} resource */
 /**@param {object} model */
-const put = (resource, model) => {
+const put = (resource, id, model) => {
   return axios
-    .put(`${BASE_URL}/${resource}`, model)
+    .put(`${BASE_URL}/${resource}/${id}`, model)
     .then(handleResponse)
     .catch(handleError);
 };

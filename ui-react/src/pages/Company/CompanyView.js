@@ -10,15 +10,20 @@ const CompanyView = ({
   error,
   data,
   columns,
-  saveCompany,
   open,
   setOpen,
+  modalFlag,
   companySchema,
   defaultCompanyValues,
-  handleClickDelete,
   setSelectedRows,
+  selectedEditValue,
   disableEditBtn,
   disableDeleteBtn,
+  handleClickSave,
+  handleClickAddOpen,
+  handleClickEditOpen,
+  handleClickUpdate,
+  handleClickDelete,
 }) => {
   return (
     <div
@@ -31,14 +36,19 @@ const CompanyView = ({
     >
       <Heading>Company</Heading>
       <MemoCompanyForm
-        saveCompany={saveCompany}
         open={open}
         setOpen={setOpen}
+        modalFlag={modalFlag}
         companySchema={companySchema}
         defaultCompanyValues={defaultCompanyValues}
-        handleClickDelete={handleClickDelete}
         disableEditBtn={disableEditBtn}
         disableDeleteBtn={disableDeleteBtn}
+        handleClickSave={handleClickSave}
+        handleClickDelete={handleClickDelete}
+        handleClickAddOpen={handleClickAddOpen}
+        handleClickEditOpen={handleClickEditOpen}
+        handleClickUpdate={handleClickUpdate}
+        selectedEditValue={selectedEditValue}
       />
       <CompanyList
         loading={loading}

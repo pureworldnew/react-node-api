@@ -6,7 +6,7 @@ const apiCompanies = new ApiCore({
   getAll: true,
   getSingle: true,
   post: true,
-  put: false,
+  put: true,
   patch: true,
   remove: true,
   removeAll: true,
