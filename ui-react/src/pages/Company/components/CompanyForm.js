@@ -271,6 +271,7 @@ const CompanyForm = ({
                   label="Requirements"
                   fullWidth
                   multiline
+                  rows={4}
                 />
                 <TypographyErrorShow>
                   {errors.jobReq?.message}

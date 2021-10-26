@@ -9,6 +9,7 @@ export const FormInputText = ({
   label,
   fullWidth,
   multiline,
+  rows,
 }) => {
   return (
     <Controller
@@ -21,6 +22,7 @@ export const FormInputText = ({
           label={label}
           fullWidth={fullWidth}
           multiline={multiline}
+          rows={rows}
         />
       )}
     />
