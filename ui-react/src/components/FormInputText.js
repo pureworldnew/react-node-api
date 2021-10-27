@@ -2,7 +2,7 @@ import React from "react";
 import { TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 
-export const FormInputText = ({
+const FormInputText = ({
   name,
   control,
   defaultValue,
@@ -28,3 +28,5 @@ export const FormInputText = ({
     />
   );
 };
+
+export default FormInputText;

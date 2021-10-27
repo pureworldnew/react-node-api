@@ -4,7 +4,6 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new Company
 exports.create = (req, res) => {
-  console.log("dsfsdf");
   // Validate request
   //   if (!req.body.first_name) {
   //     res.status(400).send({
@@ -52,6 +51,7 @@ exports.findAll = (req, res) => {
 
   Company.findAll({ where: condition })
     .then((data) => {
+      console.log(data);
       res.send(data);
     })
     .catch((err) => {

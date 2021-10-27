@@ -143,7 +143,6 @@ export function CompanyContainer() {
     apiCompanies
       .post(data)
       .then((res) => {
-        console.log(res);
         getData()
           .then((res) => {
             setOpen(false);
@@ -167,7 +166,6 @@ export function CompanyContainer() {
   };
   const handleClickAddOpen = () => {
     setModalFlag("add");
-    // setSelectedIds(null);
     setSelectedEditValue({});
     setOpen(true);
   };
@@ -201,7 +199,6 @@ export function CompanyContainer() {
       });
     }
     apiCompanies.remove(selectedIds).then((res) => {
-      console.log(res);
       getData()
         .then((res) => {
           setLoading(false);
@@ -216,7 +213,7 @@ export function CompanyContainer() {
     ids.length === 1 ? setDisableEditBtn(false) : setDisableEditBtn(true);
     ids.length >= 1 ? setDisableDeleteBtn(false) : setDisableDeleteBtn(true);
   };
-
+  console.log("state data", data);
   return (
     <CompanyView
       loading={loading}

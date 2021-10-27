@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import { Grid, MenuItem, Paper } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { FormInputText } from "components/FormInputText";
+import FormInputText from "components/FormInputText";
 import FormInputSelect from "components/FormInputSelect";
 import FormInputDate from "components/FormInputDate";
 import TypographyErrorShow from "components/TypographyErrorShow";
@@ -44,7 +44,6 @@ const CompanyForm = ({
   disableDeleteBtn,
   selectedEditValue,
 }) => {
-  console.log("default  model  company values", selectedEditValue);
   const {
     control,
     setValue,
