@@ -3,7 +3,7 @@ import CompanyView from "./CompanyView";
 import { useSelector, useDispatch } from "react-redux";
 import apiCompanies from "services/api/companies";
 import * as yup from "yup";
-import { getUsers } from "redux/actions/userActions";
+import { getCompanies } from "redux/actions/companyAction";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -119,9 +119,6 @@ function getData() {
 }
 export function CompanyContainer() {
   const dispatch = useDispatch();
-  const [data, setData] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
   const [modalFlag, setModalFlag] = useState("");
   const [disableEditBtn, setDisableEditBtn] = useState(true);
@@ -129,22 +126,13 @@ export function CompanyContainer() {
   const [selectedIds, setSelectedIds] = useState(null);
   const [selectedEditValue, setSelectedEditValue] = useState({});
 
-  const users = useSelector((state) => state.users.users);
-  const loading = useSelector((state) => state.users.loading);
-  const error = useSelector((state) => state.users.error);
-  console.log("sssssssssss", users);
+  const companies = useSelector((state) => state.companies.companies);
+  const loading = useSelector((state) => state.companies.loading);
+  const error = useSelector((state) => state.companies.error);
+  console.log("sssssssssss", companies);
 
   useEffect(() => {
-    dispatch(getUsers());
-    // getData()
-    //   .then((res) => {
-    //     setLoading(false);
-    //     setData(res);
-    //   })
-    //   .catch((error) => setError(error));
-    // return () => {
-    //   console.log("company Table axios cleanup");
-    // };
+    dispatch(getCompanies());
   }, []);
 
   const handleClickSave = (data) => {
@@ -230,7 +218,7 @@ export function CompanyContainer() {
     <CompanyView
       loading={loading}
       error={error}
-      data={users}
+      data={companies}
       columns={columns}
       handleClickSave={handleClickSave}
       handleClickAddOpen={handleClickAddOpen}
