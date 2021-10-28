@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import CompanyView from "./CompanyView";
+import { useSelector, useDispatch } from "react-redux";
 import apiCompanies from "services/api/companies";
 import * as yup from "yup";
+import { getUsers } from "redux/actions/userActions";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -116,9 +118,10 @@ function getData() {
   return apiCompanies.getAll();
 }
 export function CompanyContainer() {
+  const dispatch = useDispatch();
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
   const [modalFlag, setModalFlag] = useState("");
   const [disableEditBtn, setDisableEditBtn] = useState(true);
@@ -126,43 +129,48 @@ export function CompanyContainer() {
   const [selectedIds, setSelectedIds] = useState(null);
   const [selectedEditValue, setSelectedEditValue] = useState({});
 
-  useEffect(() => {
-    getData()
-      .then((res) => {
-        setLoading(false);
-        setData(res);
-      })
-      .catch((error) => setError(error));
+  const users = useSelector((state) => state.users.users);
+  const loading = useSelector((state) => state.users.loading);
+  const error = useSelector((state) => state.users.error);
+  console.log("sssssssssss", users);
 
-    return () => {
-      console.log("company Table axios cleanup");
-    };
+  useEffect(() => {
+    dispatch(getUsers());
+    // getData()
+    //   .then((res) => {
+    //     setLoading(false);
+    //     setData(res);
+    //   })
+    //   .catch((error) => setError(error));
+    // return () => {
+    //   console.log("company Table axios cleanup");
+    // };
   }, []);
 
   const handleClickSave = (data) => {
-    apiCompanies
-      .post(data)
-      .then((res) => {
-        getData()
-          .then((res) => {
-            setOpen(false);
-            setLoading(false);
-            setData(res);
-          })
-          .catch((error) => setError(error));
-      })
-      .catch((error) => setError(error));
+    // apiCompanies
+    //   .post(data)
+    //   .then((res) => {
+    //     getData()
+    //       .then((res) => {
+    //         setOpen(false);
+    //         setLoading(false);
+    //         setData(res);
+    //       })
+    //       .catch((error) => setError(error));
+    //   })
+    //   .catch((error) => setError(error));
   };
 
   const handleClickEditOpen = () => {
-    apiCompanies
-      .getSingle(selectedIds)
-      .then((res) => {
-        setOpen(true);
-        setModalFlag("update");
-        setSelectedEditValue(res);
-      })
-      .catch((error) => setError(error));
+    // apiCompanies
+    //   .getSingle(selectedIds)
+    //   .then((res) => {
+    //     setOpen(true);
+    //     setModalFlag("update");
+    //     setSelectedEditValue(res);
+    //   })
+    //   .catch((error) => setError(error));
   };
   const handleClickAddOpen = () => {
     setModalFlag("add");
@@ -171,41 +179,41 @@ export function CompanyContainer() {
   };
 
   const handleClickUpdate = (id, data) => {
-    apiCompanies
-      .put(id, data)
-      .then((res) => {
-        console.log(res);
-        getData()
-          .then((res) => {
-            setOpen(false);
-            setLoading(false);
-            setData(res);
-          })
-          .catch((error) => setError(error));
-      })
-      .catch((error) => console.log(error));
+    // apiCompanies
+    //   .put(id, data)
+    //   .then((res) => {
+    //     console.log(res);
+    //     getData()
+    //       .then((res) => {
+    //         setOpen(false);
+    //         setLoading(false);
+    //         setData(res);
+    //       })
+    //       .catch((error) => setError(error));
+    //   })
+    //   .catch((error) => console.log(error));
   };
 
   const handleClickDelete = () => {
-    if (selectedIds.length === data.length) {
-      apiCompanies.removeAll("All").then((res) => {
-        console.log(res);
-        getData()
-          .then((res) => {
-            setLoading(false);
-            setData(res);
-          })
-          .catch((error) => setError(error));
-      });
-    }
-    apiCompanies.remove(selectedIds).then((res) => {
-      getData()
-        .then((res) => {
-          setLoading(false);
-          setData(res);
-        })
-        .catch((error) => setError(error));
-    });
+    // if (selectedIds.length === data.length) {
+    //   apiCompanies.removeAll("All").then((res) => {
+    //     console.log(res);
+    //     getData()
+    //       .then((res) => {
+    //         setLoading(false);
+    //         setData(res);
+    //       })
+    //       .catch((error) => setError(error));
+    //   });
+    // }
+    // apiCompanies.remove(selectedIds).then((res) => {
+    //   getData()
+    //     .then((res) => {
+    //       setLoading(false);
+    //       setData(res);
+    //     })
+    //     .catch((error) => setError(error));
+    // });
   };
 
   const setSelectedRows = (ids) => {
@@ -213,12 +221,16 @@ export function CompanyContainer() {
     ids.length === 1 ? setDisableEditBtn(false) : setDisableEditBtn(true);
     ids.length >= 1 ? setDisableDeleteBtn(false) : setDisableDeleteBtn(true);
   };
-  console.log("state data", data);
   return (
+    // <>
+    //   {users.map((user) => (
+    //     <div key={user.id}>{user.username}</div>
+    //   ))}
+    // </>
     <CompanyView
       loading={loading}
       error={error}
-      data={data}
+      data={users}
       columns={columns}
       handleClickSave={handleClickSave}
       handleClickAddOpen={handleClickAddOpen}

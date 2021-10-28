@@ -10,6 +10,7 @@
     "client:dev": "cd ui-react && npm start",
     "server:start": "node -r esm index.js",
     "server:dev": "nodemon -r esm index.js",
+    "server:stop": "taskkill /f /im node.exe",
     "db:migrate": "npx sequelize-cli db:migrate",
     "dev": "concurrently \"npm run server:dev\" \"npm run client\""
   },
