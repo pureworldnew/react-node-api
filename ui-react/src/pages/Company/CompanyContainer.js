@@ -3,7 +3,12 @@ import CompanyView from "./CompanyView";
 import { useSelector, useDispatch } from "react-redux";
 import apiCompanies from "services/api/companies";
 import * as yup from "yup";
-import { getCompanies } from "redux/actions/companyAction";
+import {
+  addCompany,
+  getCompanies,
+  modalOpen,
+  setModalFlag,
+} from "redux/actions/companyAction";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -119,8 +124,6 @@ function getData() {
 }
 export function CompanyContainer() {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
-  const [modalFlag, setModalFlag] = useState("");
   const [disableEditBtn, setDisableEditBtn] = useState(true);
   const [disableDeleteBtn, setDisableDeleteBtn] = useState(true);
   const [selectedIds, setSelectedIds] = useState(null);
@@ -129,13 +132,19 @@ export function CompanyContainer() {
   const companies = useSelector((state) => state.companies.companies);
   const loading = useSelector((state) => state.companies.loading);
   const error = useSelector((state) => state.companies.error);
-  console.log("sssssssssss", companies);
+  const open = useSelector((state) => state.companies.modalOpen);
+  const modalFlag = useSelector((state) => state.companies.modalFlag);
+  console.log("open modal ", open);
 
   useEffect(() => {
     dispatch(getCompanies());
   }, []);
 
   const handleClickSave = (data) => {
+    dispatch(addCompany(data));
+    console.log("hhhhhhhhhhhhh");
+    dispatch(modalOpen(false));
+    dispatch(getCompanies());
     // apiCompanies
     //   .post(data)
     //   .then((res) => {
@@ -161,9 +170,13 @@ export function CompanyContainer() {
     //   .catch((error) => setError(error));
   };
   const handleClickAddOpen = () => {
-    setModalFlag("add");
+    dispatch(modalOpen(true));
+    dispatch(setModalFlag("add"));
     setSelectedEditValue({});
-    setOpen(true);
+  };
+
+  const setOpen = (val) => {
+    dispatch(modalOpen(val));
   };
 
   const handleClickUpdate = (id, data) => {
@@ -210,11 +223,6 @@ export function CompanyContainer() {
     ids.length >= 1 ? setDisableDeleteBtn(false) : setDisableDeleteBtn(true);
   };
   return (
-    // <>
-    //   {users.map((user) => (
-    //     <div key={user.id}>{user.username}</div>
-    //   ))}
-    // </>
     <CompanyView
       loading={loading}
       error={error}

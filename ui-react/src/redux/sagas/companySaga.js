@@ -10,8 +10,18 @@ function* fetchCompanies(action) {
   }
 }
 
+function* addCompany(action) {
+  try {
+    const company = yield call(apiCompanies.post, action.payload);
+    yield put({ type: "ADD_COMPANY_SUCCESS", company: company });
+  } catch (e) {
+    yield put({ type: "ADD_COMPANY_FAILED", message: e.message });
+  }
+}
+
 function* companySaga() {
   yield takeEvery("GET_COMPANIES_REQUESTED", fetchCompanies);
+  yield takeEvery("ADD_COMPANY_REQUESTED", addCompany);
 }
 
 export default companySaga;
