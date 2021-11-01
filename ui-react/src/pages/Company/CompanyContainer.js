@@ -7,7 +7,10 @@ import {
   addCompany,
   getCompanies,
   modalOpen,
-  setModalFlag,
+  setSelectedIds,
+  getSingleCompany,
+  addOpenModal,
+  updateCompany,
 } from "redux/actions/companyAction";
 
 const columns = [
@@ -119,22 +122,22 @@ const defaultCompanyValues = {
   regWeekday: "",
 };
 
-function getData() {
-  return apiCompanies.getAll();
-}
 export function CompanyContainer() {
   const dispatch = useDispatch();
   const [disableEditBtn, setDisableEditBtn] = useState(true);
   const [disableDeleteBtn, setDisableDeleteBtn] = useState(true);
-  const [selectedIds, setSelectedIds] = useState(null);
-  const [selectedEditValue, setSelectedEditValue] = useState({});
+  // const [selectedIds, setSelectedIds] = useState(null);
+  // const [selectedEditValue, setSelectedEditValue] = useState({});
 
   const companies = useSelector((state) => state.companies.companies);
   const loading = useSelector((state) => state.companies.loading);
   const error = useSelector((state) => state.companies.error);
   const open = useSelector((state) => state.companies.modalOpen);
   const modalFlag = useSelector((state) => state.companies.modalFlag);
-  console.log("open modal ", open);
+  const selectedIds = useSelector((state) => state.companies.selectedIds);
+  const selectedEditValue = useSelector(
+    (state) => state.companies.selectedEditValue
+  );
 
   useEffect(() => {
     dispatch(getCompanies());
@@ -142,37 +145,13 @@ export function CompanyContainer() {
 
   const handleClickSave = (data) => {
     dispatch(addCompany(data));
-    console.log("hhhhhhhhhhhhh");
-    dispatch(modalOpen(false));
-    dispatch(getCompanies());
-    // apiCompanies
-    //   .post(data)
-    //   .then((res) => {
-    //     getData()
-    //       .then((res) => {
-    //         setOpen(false);
-    //         setLoading(false);
-    //         setData(res);
-    //       })
-    //       .catch((error) => setError(error));
-    //   })
-    //   .catch((error) => setError(error));
   };
 
   const handleClickEditOpen = () => {
-    // apiCompanies
-    //   .getSingle(selectedIds)
-    //   .then((res) => {
-    //     setOpen(true);
-    //     setModalFlag("update");
-    //     setSelectedEditValue(res);
-    //   })
-    //   .catch((error) => setError(error));
+    dispatch(getSingleCompany(selectedIds));
   };
   const handleClickAddOpen = () => {
-    dispatch(modalOpen(true));
-    dispatch(setModalFlag("add"));
-    setSelectedEditValue({});
+    dispatch(addOpenModal());
   };
 
   const setOpen = (val) => {
@@ -180,6 +159,7 @@ export function CompanyContainer() {
   };
 
   const handleClickUpdate = (id, data) => {
+    dispatch(updateCompany(id, data));
     // apiCompanies
     //   .put(id, data)
     //   .then((res) => {
@@ -218,7 +198,7 @@ export function CompanyContainer() {
   };
 
   const setSelectedRows = (ids) => {
-    setSelectedIds(ids);
+    dispatch(setSelectedIds(ids));
     ids.length === 1 ? setDisableEditBtn(false) : setDisableEditBtn(true);
     ids.length >= 1 ? setDisableDeleteBtn(false) : setDisableDeleteBtn(true);
   };

@@ -14,6 +14,13 @@ export function addCompany(company) {
   };
 }
 
+export function updateCompany(id, data) {
+  return {
+    type: type.UPDATE_COMPANY_REQUESTED,
+    payload: { id, data },
+  };
+}
+
 export function modalOpen(status) {
   return {
     type: type.MODAL_OPEN,
@@ -26,4 +33,26 @@ export function setModalFlag(value) {
     type: type.SET_MODAL_FLAG,
     payload: value,
   };
+}
+
+export function setSelectedEditValue(value) {
+  return {
+    type: type.SET_SELECTED_EDIT,
+    payload: value,
+  };
+}
+
+export function setSelectedIds(ids) {
+  return {
+    type: type.SET_SELECTED_ID,
+    payload: ids,
+  };
+}
+
+export function getSingleCompany(id) {
+  return { type: type.GET_SINGLE_COMPANY, payload: id };
+}
+
+export function addOpenModal() {
+  return { type: type.ADD_OPEN_MODAL };
 }
