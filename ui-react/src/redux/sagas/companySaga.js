@@ -37,6 +37,16 @@ function* updateCompany(action) {
   }
 }
 
+function* removeCompany(action) {
+  try {
+    const del = yield call(apiCompanies.remove, action.payload);
+    const companies = yield call(apiCompanies.getAll);
+    yield put({ type: "REMOVE_COMPANY_SUCCESS", companies: companies });
+  } catch (e) {
+    yield put({ type: "REMOVE_COMPANY_FAILED", message: e.message });
+  }
+}
+
 function* getSingleCompany(action) {
   try {
     const company = yield call(apiCompanies.getSingle, action.payload);
@@ -50,6 +60,7 @@ function* companySaga() {
   yield takeEvery("GET_COMPANIES_REQUESTED", fetchCompanies);
   yield takeEvery("ADD_COMPANY_REQUESTED", addCompany);
   yield takeEvery("UPDATE_COMPANY_REQUESTED", updateCompany);
+  yield takeEvery("REMOVE_COMPANY_REQUESTED", removeCompany);
   yield takeEvery("GET_SINGLE_COMPANY", getSingleCompany);
 }
 

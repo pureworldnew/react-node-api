@@ -9,7 +9,6 @@ const apiCompanies = new ApiCore({
   put: true,
   patch: true,
   remove: true,
-  removeAll: true,
   url: url,
 });
 

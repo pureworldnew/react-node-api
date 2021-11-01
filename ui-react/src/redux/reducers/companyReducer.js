@@ -32,6 +32,7 @@ export default function companies(state = initialState, action) {
     case type.UPDATE_COMPANY_SUCCESS:
       return {
         ...state,
+        loading: false,
         modalOpen: false,
         companies: action.companies,
       };
@@ -39,6 +40,23 @@ export default function companies(state = initialState, action) {
       return {
         ...state,
         modalOpen: false,
+        error: action.message,
+      };
+    case type.REMOVE_COMPANY_REQUESTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case type.REMOVE_COMPANY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        companies: action.companies,
+      };
+    case type.REMOVE_COMPANY_FAILED:
+      return {
+        ...state,
+        loading: false,
         error: action.message,
       };
     case type.ADD_COMPANY_REQUESTED:

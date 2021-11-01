@@ -21,6 +21,13 @@ export function updateCompany(id, data) {
   };
 }
 
+export function removeCompany(value) {
+  return {
+    type: type.REMOVE_COMPANY_REQUESTED,
+    payload: value,
+  };
+}
+
 export function modalOpen(status) {
   return {
     type: type.MODAL_OPEN,

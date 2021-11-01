@@ -56,15 +56,6 @@ const remove = (resource, ids) => {
     .catch(handleError);
 };
 
-/**@param {string} resource */
-/**@param {string} ids */
-const removeAll = (resource, ids) => {
-  return axios
-    .delete(`${BASE_URL}/${resource}`, { data: { ids: ids } })
-    .then(handleResponse)
-    .catch(handleError);
-};
-
 export const apiProvider = {
   getAll,
   getSingle,
@@ -72,5 +63,4 @@ export const apiProvider = {
   put,
   patch,
   remove,
-  removeAll,
 };

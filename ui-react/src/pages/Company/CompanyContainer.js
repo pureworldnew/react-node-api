@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CompanyView from "./CompanyView";
 import { useSelector, useDispatch } from "react-redux";
-import apiCompanies from "services/api/companies";
 import * as yup from "yup";
 import {
   addCompany,
@@ -11,6 +10,7 @@ import {
   getSingleCompany,
   addOpenModal,
   updateCompany,
+  removeCompany,
 } from "redux/actions/companyAction";
 
 const columns = [
@@ -126,9 +126,6 @@ export function CompanyContainer() {
   const dispatch = useDispatch();
   const [disableEditBtn, setDisableEditBtn] = useState(true);
   const [disableDeleteBtn, setDisableDeleteBtn] = useState(true);
-  // const [selectedIds, setSelectedIds] = useState(null);
-  // const [selectedEditValue, setSelectedEditValue] = useState({});
-
   const companies = useSelector((state) => state.companies.companies);
   const loading = useSelector((state) => state.companies.loading);
   const error = useSelector((state) => state.companies.error);
@@ -160,41 +157,14 @@ export function CompanyContainer() {
 
   const handleClickUpdate = (id, data) => {
     dispatch(updateCompany(id, data));
-    // apiCompanies
-    //   .put(id, data)
-    //   .then((res) => {
-    //     console.log(res);
-    //     getData()
-    //       .then((res) => {
-    //         setOpen(false);
-    //         setLoading(false);
-    //         setData(res);
-    //       })
-    //       .catch((error) => setError(error));
-    //   })
-    //   .catch((error) => console.log(error));
   };
 
   const handleClickDelete = () => {
-    // if (selectedIds.length === data.length) {
-    //   apiCompanies.removeAll("All").then((res) => {
-    //     console.log(res);
-    //     getData()
-    //       .then((res) => {
-    //         setLoading(false);
-    //         setData(res);
-    //       })
-    //       .catch((error) => setError(error));
-    //   });
-    // }
-    // apiCompanies.remove(selectedIds).then((res) => {
-    //   getData()
-    //     .then((res) => {
-    //       setLoading(false);
-    //       setData(res);
-    //     })
-    //     .catch((error) => setError(error));
-    // });
+    if (selectedIds.length === companies.length) {
+      dispatch(removeCompany("All"));
+    } else {
+      dispatch(removeCompany(selectedIds));
+    }
   };
 
   const setSelectedRows = (ids) => {
