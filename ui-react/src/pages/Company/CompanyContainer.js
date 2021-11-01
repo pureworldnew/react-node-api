@@ -138,7 +138,7 @@ export function CompanyContainer() {
 
   useEffect(() => {
     dispatch(getCompanies());
-  }, []);
+  }, [dispatch]);
 
   const handleClickSave = (data) => {
     dispatch(addCompany(data));

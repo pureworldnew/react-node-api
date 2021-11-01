@@ -39,7 +39,7 @@ function* updateCompany(action) {
 
 function* removeCompany(action) {
   try {
-    const del = yield call(apiCompanies.remove, action.payload);
+    yield call(apiCompanies.remove, action.payload);
     const companies = yield call(apiCompanies.getAll);
     yield put({ type: "REMOVE_COMPANY_SUCCESS", companies: companies });
   } catch (e) {
