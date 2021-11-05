@@ -20,6 +20,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import MailIcon from "@mui/icons-material/Mail";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import BusinessIcon from "@mui/icons-material/Business";
+import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 import DoneIcon from "@mui/icons-material/Done";
 import PendingIcon from "@mui/icons-material/Pending";
@@ -335,6 +336,8 @@ export default function ComplexSharedView({ children }) {
         return <ScheduleIcon />;
       case "Company":
         return <BusinessIcon />;
+      case "Recruiter":
+        return <PersonSearchIcon />;
       case "Technical":
         return <VideoCallIcon />;
       case "Final":

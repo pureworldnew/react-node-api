@@ -10,6 +10,7 @@ import {
   AUTH_PAGE1,
   SCHEDULE,
   COMPANY,
+  RECRUITER,
   TECHNICAL,
   FINAL,
   OFFER,
@@ -26,6 +27,7 @@ import { Final } from "pages/Final";
 import { Offer } from "pages/Offer";
 import { Project } from "pages/Project";
 import { Company } from "pages/Company";
+import { Recruiter } from "pages/Recruiter";
 
 export const RouterConfig = () => {
   return (
@@ -37,6 +39,7 @@ export const RouterConfig = () => {
         <Route exact path={PAGE1} component={Page1} />
         <Route exact path={SCHEDULE} component={Schedule} />
         <Route exact path={COMPANY} component={Company} />
+        <Route exact path={RECRUITER} component={Recruiter} />
         <Route exact path={TECHNICAL} component={Technical} />
         <Route exact path={FINAL} component={Final} />
         <Route exact path={OFFER} component={Offer} />

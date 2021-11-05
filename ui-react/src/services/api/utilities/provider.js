@@ -12,6 +12,14 @@ const getAll = (resource) => {
 };
 
 /**@param {string} resource */
+const load = (resource) => {
+  return axios
+    .get(`${BASE_URL}/${resource}`)
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+/**@param {string} resource */
 /**@param {string} id */
 const getSingle = (resource, id) => {
   return axios
@@ -63,4 +71,5 @@ export const apiProvider = {
   put,
   patch,
   remove,
+  load,
 };

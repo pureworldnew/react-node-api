@@ -9,6 +9,8 @@ export const FINAL = "/final";
 export const OFFER = "/offer";
 export const PROJECT = "/project";
 export const COMPANY = "/company";
+export const RECRUITER = "/recruiter";
+
 export const NAVLIST = [
   {
     name: "Home",
@@ -25,6 +27,7 @@ export const NAVPRIVATELIST = [
     name: "Schedule",
     route: SCHEDULE,
   },
+  { name: "Recruiter", route: RECRUITER },
   {
     name: "Company",
     route: COMPANY,
