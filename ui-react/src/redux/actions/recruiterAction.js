@@ -5,3 +5,10 @@ export function loadRecruiters() {
     type: type.LOAD_RECRUITERS_REQUESTED,
   };
 }
+
+export function getRecruiters(recruiters) {
+  return {
+    type: type.GET_RECRUITERS_REQUESTED,
+    payload: recruiters,
+  };
+}

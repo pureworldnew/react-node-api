@@ -10,8 +10,19 @@ function* loadRecruiters(action) {
   }
 }
 
+function* getRecruiters(action) {
+  try {
+    const recruiters = yield call(apiRecruiters.getAll);
+    console.log(recruiters);
+    yield put({ type: "GET_RECRUITERS_SUCCESS", recruiters: recruiters });
+  } catch (e) {
+    yield put({ type: "GET_RECRUITERS_FAILED", message: e.message });
+  }
+}
+
 function* recruiterSaga() {
   yield takeEvery("LOAD_RECRUITERS_REQUESTED", loadRecruiters);
+  yield takeEvery("GET_RECRUITERS_REQUESTED", getRecruiters);
 }
 
 export default recruiterSaga;

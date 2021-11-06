@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import RecruiterView from "./RecruiterView";
 import { useSelector, useDispatch } from "react-redux";
-import { loadRecruiters } from "redux/actions/recruiterAction";
+import { getRecruiters, loadRecruiters } from "redux/actions/recruiterAction";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -25,8 +25,8 @@ const columns = [
     editable: true,
   },
   {
-    field: "name",
-    headerName: "Name",
+    field: "interviewerName",
+    headerName: "Interviewer Name",
     width: 150,
     editable: true,
   },
@@ -56,8 +56,14 @@ export const RecruiterContainer = () => {
   const dispatch = useDispatch();
 
   const recruiters = useSelector((state) => state.recruiters.recruiters);
+  console.log(recruiters);
   const loading = useSelector((state) => state.recruiters.loading);
   const error = useSelector((state) => state.recruiters.error);
+
+  useEffect(() => {
+    dispatch(getRecruiters());
+    return () => {};
+  }, [dispatch]);
 
   const onClickReload = () => {
     dispatch(loadRecruiters());

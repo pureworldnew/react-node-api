@@ -4,6 +4,9 @@ module.exports = (app) => {
 
   let router = require("express").Router();
 
+  // Retrieve all companies
+  router.get("/", recruiters.findAll);
+
   // load recruiters
   router.get("/load", recruiters.load);
 
