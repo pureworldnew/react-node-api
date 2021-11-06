@@ -13,17 +13,18 @@ module.exports = (sequelize, DataTypes) => {
   }
   Recruiter.init(
     {
-      created_time: DataTypes.STRING,
-      phone_number: DataTypes.STRING,
-      start_time: DataTypes.STRING,
-      interviewer_name: DataTypes.STRING,
-      company_name: DataTypes.STRING,
-      role_name: DataTypes.STRING,
-      kind_of_interview: DataTypes.STRING,
-      extra_notes: DataTypes.STRING,
+      createdTime: DataTypes.STRING,
+      phoneNumber: DataTypes.STRING,
+      startTime: DataTypes.STRING,
+      interviewerName: DataTypes.STRING,
+      companyName: DataTypes.STRING,
+      roleName: DataTypes.STRING,
+      kindOfInterview: DataTypes.STRING,
+      extraNotes: DataTypes.STRING,
     },
     {
       sequelize,
+      underscored: true,
       modelName: "Recruiter",
     }
   );

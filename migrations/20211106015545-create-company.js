@@ -33,7 +33,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       job_req: {
-        type: Sequelize.TEXT("long"),
+        type: Sequelize.TEXT,
       },
       job_skills: {
         type: Sequelize.STRING,
@@ -48,10 +48,12 @@ module.exports = {
         type: Sequelize.STRING,
       },
       createdAt: {
+        field: "created_at",
         allowNull: false,
         type: Sequelize.DATE,
       },
       updatedAt: {
+        field: "updated_at",
         allowNull: false,
         type: Sequelize.DATE,
       },

@@ -6,7 +6,7 @@ import { getRecruiters, loadRecruiters } from "redux/actions/recruiterAction";
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
-    field: "createdAt",
+    field: "createdTime",
     headerName: "Created",
     width: 150,
     editable: true,

@@ -85,7 +85,7 @@ exports.load = async (req, res) => {
   let eventList = await httpRequest(eventListOptions);
   let promises = [];
 
-  eventList.collection.forEach(async (e) => {
+  eventList.collection.forEach((e) => {
     let eventDetailOptions = {
       host: "api.calendly.com",
       port: 443,
@@ -99,27 +99,24 @@ exports.load = async (req, res) => {
     promises.push(httpRequest(eventDetailOptions));
   });
   let eventListDetails = await Promise.all(promises);
-  //   cancel_url: "https://calendly.com/cancellations/0e1f95e2-4624-4cb4-8e37-68bc508c6b98"
-  // created_at: "2021-11-02T12:53:23.517969Z"
-  // email: "alka.dagar@nlbtech.com"
-  // event: "https://api.calendly.com/scheduled_events/85fe7947-0873-4b9f-89e3-227c947c6d50"
-  // first_name: null
-  // last_name: null
-  // name: "Alka Dagar "
-  // new_invitee: null
-  // old_invitee: null
-  // payment: null
-  // questions_and_answers: [{answer: "NTT/Citi", position: 0, question: "Company or Client Name"},…]
-  // reschedule_url: "https://calendly.com/reschedulings/0e1f95e2-4624-4cb4-8e37-68bc508c6b98"
-  // rescheduled: false
-  // status: "active"
-  // text_reminder_number: null
-  // timezone: "America/Chicago"
-  // tracking: {utm_campaign: null, utm_source: null, utm_medium: null, utm_content: null, utm_term: null,…}
-  // updated_at: "2021-11-02T12:53:23.517969Z"
-  // uri: "https://api.calendly.com/scheduled_events/85fe7947-0873-4b9f-89e3-227c947c6d50/invitees/0e1f95e2-4624-4cb4-8e37-68bc508c6b98"
-  console.log(eventListDetails);
-  res.send(eventListDetails);
+
+  // write data into DB
+  let insertPromises = eventListDetails.map((e) => {
+    return Recruiter.create({
+      createdTime: e.collection[0].created_at,
+      phoneNumber: e.collection[0].email,
+      startTime: e.collection[0].email,
+      interviewerName: e.collection[0].name,
+      companyName: e.collection[0].questions_and_answers[0].answer,
+      roleName: e.collection[0].questions_and_answers[1].answer,
+      kindOfInterview: e.collection[0].questions_and_answers[2].answer,
+      extraNotes: e.collection[0].questions_and_answers[3]
+        ? e.collection[0].questions_and_answers[3].answer
+        : "",
+    });
+  });
+  let dbInsertResult = await Promise.all(insertPromises);
+  res.send(dbInsertResult);
 };
 
 //Retrieve all recruiters from the database
