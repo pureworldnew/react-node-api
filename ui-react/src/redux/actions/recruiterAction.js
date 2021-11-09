@@ -12,3 +12,10 @@ export function getRecruiters(recruiters) {
     payload: recruiters,
   };
 }
+
+export function removeAllRecruiters(value) {
+  return {
+    type: type.REMOVE_ALL_RECRUITERS_REQUESTED,
+    payload: value,
+  };
+}

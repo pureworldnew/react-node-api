@@ -1,62 +1,23 @@
 import React, { useEffect } from "react";
 import RecruiterView from "./RecruiterView";
 import { useSelector, useDispatch } from "react-redux";
-import { getRecruiters, loadRecruiters } from "redux/actions/recruiterAction";
+import {
+  getRecruiters,
+  loadRecruiters,
+  removeAllRecruiters,
+} from "redux/actions/recruiterAction";
+import { recruiterColumnsConfig } from "config";
 
-const columns = [
-  { field: "id", headerName: "ID", width: 90 },
-  {
-    field: "createdTime",
-    headerName: "Created",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "eventUid",
-    headerName: "Event Uid",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "startTime",
-    headerName: "Start Time",
-    type: "number",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "interviewerName",
-    headerName: "Interviewer Name",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "companyName",
-    headerName: "Company Name",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "roleName",
-    headerName: "Role Name",
-    width: 100,
-  },
-  {
-    field: "kindOfInterview",
-    headerName: "Kind Of Interview",
-    width: 150,
-  },
-  {
-    field: "extraNotes",
-    headerName: "Anything sharing",
-    width: 200,
-  },
-];
 export const RecruiterContainer = () => {
+  const [startDateTime, setStartDateTime] = React.useState(new Date());
+
+  const handleDateTimeChange = (newValue) => {
+    setStartDateTime(newValue);
+  };
   const dispatch = useDispatch();
 
   const recruiters = useSelector((state) => state.recruiters.recruiters);
-  console.log(recruiters);
+
   const loading = useSelector((state) => state.recruiters.loading);
   const error = useSelector((state) => state.recruiters.error);
 
@@ -68,13 +29,20 @@ export const RecruiterContainer = () => {
   const onClickReload = () => {
     dispatch(loadRecruiters());
   };
+
+  const onClickRemoveAll = () => {
+    dispatch(removeAllRecruiters("All"));
+  };
   return (
     <RecruiterView
       loading={loading}
       error={error}
       data={recruiters}
-      columns={columns}
+      startDateTime={startDateTime}
+      columns={recruiterColumnsConfig}
       onClickReload={onClickReload}
+      handleDateTimeChange={handleDateTimeChange}
+      onClickRemoveAll={onClickRemoveAll}
     />
   );
 };

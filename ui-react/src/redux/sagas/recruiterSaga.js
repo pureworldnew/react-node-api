@@ -20,9 +20,20 @@ function* getRecruiters(action) {
   }
 }
 
+function* removeAllRecruiters(action) {
+  try {
+    yield call(apiRecruiters.remove, action.payload);
+    const recruiters = yield call(apiRecruiters.getAll);
+    yield put({ type: "GET_RECRUITERS_SUCCESS", recruiters: recruiters });
+  } catch (e) {
+    yield put({ type: "REMOVE_ALL_RECRUITERS_FAILED", message: e.message });
+  }
+}
+
 function* recruiterSaga() {
   yield takeEvery("LOAD_RECRUITERS_REQUESTED", loadRecruiters);
   yield takeEvery("GET_RECRUITERS_REQUESTED", getRecruiters);
+  yield takeEvery("REMOVE_ALL_RECRUITERS_REQUESTED", removeAllRecruiters);
 }
 
 export default recruiterSaga;

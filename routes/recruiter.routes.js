@@ -10,5 +10,8 @@ module.exports = (app) => {
   // load recruiters
   router.get("/load", recruiters.load);
 
+  // delete recruiters
+  router.delete("/", recruiters.delete);
+
   app.use("/api/recruiters", router);
 };

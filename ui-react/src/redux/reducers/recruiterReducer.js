@@ -41,6 +41,22 @@ export default function recruiters(state = initialState, action) {
         loading: false,
         error: action.message,
       };
+    case type.REMOVE_ALL_RECRUITERS_REQUESTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case type.REMOVE_ALL_RECRUITERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+    case type.REMOVE_ALL_RECRUITERS_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.message,
+      };
     default:
       return state;
   }

@@ -7,3 +7,124 @@ export const dateConfig = {
   format4: "ddd, MMM DD", // eg. "Mon, Sep 07"
   format5: "YYYY-MM-DD",
 };
+
+export const recruiterColumnsConfig = [
+  {
+    field: "createdTime",
+    headerName: "Created",
+    width: 250,
+    editable: true,
+  },
+  {
+    field: "startTime",
+    headerName: "Start Time",
+    width: 250,
+    editable: true,
+  },
+  {
+    field: "interviewerName",
+    headerName: "Interviewer Name",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "companyName",
+    headerName: "Company Name",
+    width: 200,
+    editable: true,
+  },
+  {
+    field: "roleName",
+    headerName: "Role Name",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "kindOfInterview",
+    headerName: "Kind Of Interview",
+    width: 200,
+  },
+  {
+    field: "extraNotes",
+    headerName: "Anything sharing",
+    width: 400,
+    editable: true,
+  },
+];
+
+export const companyColumnsConfig = [
+  { field: "id", headerName: "ID", width: 90 },
+  {
+    field: "companyName",
+    headerName: "Name",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "companySize",
+    headerName: "Size",
+    type: "number",
+    width: 80,
+    editable: true,
+  },
+  {
+    field: "companyLocation",
+    headerName: "Location",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "jobRole",
+    headerName: "Role",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "jobType",
+    headerName: "Type",
+    width: 100,
+  },
+  {
+    field: "jobRating",
+    headerName: "Rating",
+    width: 100,
+  },
+  {
+    field: "jobHow",
+    headerName: "How",
+    width: 100,
+  },
+  {
+    field: "jobWhere",
+    headerName: "Where",
+    width: 100,
+    editable: true,
+  },
+  {
+    field: "jobReq",
+    headerName: "Requirements",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "jobSkills",
+    headerName: "Skills",
+    width: 210,
+    editable: true,
+  },
+  {
+    field: "socialAccount",
+    headerName: "Account",
+    width: 100,
+  },
+  {
+    field: "regDate",
+    headerName: "Date",
+    width: 100,
+  },
+  {
+    field: "regWeekday",
+    headerName: "weekday",
+    width: 100,
+  },
+];
