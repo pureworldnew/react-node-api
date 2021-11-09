@@ -2,13 +2,11 @@ const http = require("http");
 const https = require("https");
 const httpRequest = (options) => {
   return new Promise((resolve, reject) => {
-    console.log("rest::httpRequest");
     const port = options.port == 443 ? https : http;
 
     let output = "";
 
     const req = port.request(options, (res) => {
-      console.log(`${options.host} : ${res.statusCode}`);
       if (res.statusCode < 200 || res.statusCode >= 300) {
         return reject(new Error(`statusCode=${res.statusCode}`));
       }

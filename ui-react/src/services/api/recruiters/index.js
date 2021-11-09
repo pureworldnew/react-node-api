@@ -16,8 +16,8 @@ const apiRecruiters = new ApiCore({
   url: url,
 });
 
-apiRecruiters.load = () => {
-  return apiProvider.load(loadUrl);
+apiRecruiters.load = (startTime) => {
+  return apiProvider.load(loadUrl, startTime);
 };
 
 export default apiRecruiters;

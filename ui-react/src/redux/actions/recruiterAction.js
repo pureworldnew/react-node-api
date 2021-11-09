@@ -1,8 +1,9 @@
 import * as type from "../types";
 
-export function loadRecruiters() {
+export function loadRecruiters(value) {
   return {
     type: type.LOAD_RECRUITERS_REQUESTED,
+    payload: value,
   };
 }
 

@@ -8,7 +8,7 @@ module.exports = (app) => {
   router.get("/", recruiters.findAll);
 
   // load recruiters
-  router.get("/load", recruiters.load);
+  router.post("/load", recruiters.load);
 
   // delete recruiters
   router.delete("/", recruiters.delete);

@@ -17,7 +17,13 @@ export const recruiterColumnsConfig = [
   },
   {
     field: "startTime",
-    headerName: "Start Time",
+    headerName: "Start Time ( UTC - 6 )",
+    width: 250,
+    editable: true,
+  },
+  {
+    field: "startTimeLocal",
+    headerName: "Start Time ( UTC + 8 )",
     width: 250,
     editable: true,
   },
@@ -128,3 +134,9 @@ export const companyColumnsConfig = [
     width: 100,
   },
 ];
+
+export const convertLocaleTime = (time, locale) => {
+  return new Date(time).toLocaleString("en-US", {
+    timeZone: locale,
+  });
+};

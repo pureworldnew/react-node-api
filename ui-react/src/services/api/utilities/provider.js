@@ -12,9 +12,10 @@ const getAll = (resource) => {
 };
 
 /**@param {string} resource */
-const load = (resource) => {
+/**@param {string} startTime */
+const load = (resource, startTime) => {
   return axios
-    .get(`${BASE_URL}/${resource}`)
+    .post(`${BASE_URL}/${resource}`, startTime)
     .then(handleResponse)
     .catch(handleError);
 };

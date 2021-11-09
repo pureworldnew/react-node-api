@@ -1,7 +1,7 @@
 const db = require("../models");
 const Recruiter = db.Recruiter;
 const Op = db.Sequelize.Op;
-const { httpRequest, asyncFilter } = require("../utils");
+const { httpRequest, asyncFilter, convertLocal } = require("../utils");
 const { calendlyKey } = require("../config/config_env");
 
 const userOptions = {
@@ -66,14 +66,19 @@ const userOptions = {
 // load scheduling event from calendly
 exports.load = async (req, res) => {
   let result = await httpRequest(userOptions);
-
+  let timezone = result.resource.timezone;
   let organization = result.resource.current_organization;
   let status = "active";
-  let min_start_time = "2021-11-04T18:35:47.000Z";
+  let min_start_time = JSON.stringify(new Date(req.body.startDateTime));
+  let path = `/scheduled_events?organization=${organization}&status=${status}&min_start_time=${min_start_time.substring(
+    1,
+    min_start_time.length - 1
+  )}`;
+
   const eventListOptions = {
     host: "api.calendly.com",
     port: 443,
-    path: `/scheduled_events?organization=${organization}&status=${status}&min_start_time=${min_start_time}`,
+    path: path,
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -82,6 +87,7 @@ exports.load = async (req, res) => {
   };
 
   let eventList = await httpRequest(eventListOptions);
+  console.log("eventList", eventList);
   let promises = [];
 
   let startTime = [];
@@ -109,11 +115,9 @@ exports.load = async (req, res) => {
       let cnt = await Recruiter.count({
         where: { eventUid: e.collection[0].event.split("/").pop() },
       });
-      // console.log(cnt);
       if (cnt === 0) return true;
       else return false;
     });
-    console.log(insertPromises);
     let dbInsertResult = {};
     if (!(insertPromises && Object.keys(insertPromises).length === 0)) {
       insertPromises.map((e, i) => {
@@ -122,9 +126,15 @@ exports.load = async (req, res) => {
           eventUid: e.collection[0].event.split("/").pop(),
           startTime: startTime[i],
           interviewerName: e.collection[0].name,
-          companyName: e.collection[0].questions_and_answers[0].answer,
-          roleName: e.collection[0].questions_and_answers[1].answer,
-          kindOfInterview: e.collection[0].questions_and_answers[2].answer,
+          companyName: e.collection[0].questions_and_answers[0]
+            ? e.collection[0].questions_and_answers[0].answer
+            : "",
+          roleName: e.collection[0].questions_and_answers[1]
+            ? e.collection[0].questions_and_answers[1].answer
+            : "",
+          kindOfInterview: e.collection[0].questions_and_answers[2]
+            ? e.collection[0].questions_and_answers[2].answer
+            : "",
           extraNotes: e.collection[0].questions_and_answers[3]
             ? e.collection[0].questions_and_answers[3].answer
             : "",
@@ -142,9 +152,9 @@ exports.load = async (req, res) => {
 //Retrieve all recruiters from the database
 exports.findAll = (req, res) => {
   let todayTime = new Date(new Date().toUTCString());
-  ("2021-11-08T18:35:47.000Z");
-  console.log(todayTime);
-  Recruiter.findAll({})
+  Recruiter.findAll({
+    order: [["startTime", "ASC"]],
+  })
     .then((data) => {
       res.send(data);
     })
