@@ -37,5 +37,9 @@ const httpRequest = (options) => {
     req.end();
   });
 };
+const asyncFilter = async (arr, predicate) => {
+  const results = await Promise.all(arr.map(predicate));
 
-module.exports = httpRequest;
+  return arr.filter((_v, index) => results[index]);
+};
+module.exports = { httpRequest, asyncFilter };

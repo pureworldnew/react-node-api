@@ -12,8 +12,8 @@ const columns = [
     editable: true,
   },
   {
-    field: "phoneNumber",
-    headerName: "Phone Number",
+    field: "eventUid",
+    headerName: "Event Uid",
     width: 150,
     editable: true,
   },

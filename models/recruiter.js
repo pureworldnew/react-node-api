@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Recruiter.init(
     {
+      eventUid: DataTypes.STRING,
       createdTime: DataTypes.STRING,
-      phoneNumber: DataTypes.STRING,
       startTime: DataTypes.STRING,
       interviewerName: DataTypes.STRING,
       companyName: DataTypes.STRING,

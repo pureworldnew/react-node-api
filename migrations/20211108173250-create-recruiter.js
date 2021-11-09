@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      created_time: {
+      event_uid: {
         type: Sequelize.STRING,
       },
-      phone_number: {
+      created_time: {
         type: Sequelize.STRING,
       },
       start_time: {

@@ -1,7 +1,7 @@
 const db = require("../models");
 const Recruiter = db.Recruiter;
 const Op = db.Sequelize.Op;
-const httpRequest = require("../utils");
+const { httpRequest, asyncFilter } = require("../utils");
 const { calendlyKey } = require("../config/config_env");
 
 const userOptions = {
@@ -69,8 +69,7 @@ exports.load = async (req, res) => {
 
   let organization = result.resource.current_organization;
   let status = "active";
-  let min_start_time = "2021-11-04T17:15:00.000000Z";
-
+  let min_start_time = "2021-11-04T18:35:47.000Z";
   const eventListOptions = {
     host: "api.calendly.com",
     port: 443,
@@ -85,50 +84,68 @@ exports.load = async (req, res) => {
   let eventList = await httpRequest(eventListOptions);
   let promises = [];
 
-  eventList.collection.forEach((e) => {
-    let eventDetailOptions = {
-      host: "api.calendly.com",
-      port: 443,
-      path: `/scheduled_events/${e.uri.split("/").pop()}/invitees`,
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${calendlyKey}`,
-      },
-    };
-    promises.push(httpRequest(eventDetailOptions));
-  });
-  let eventListDetails = await Promise.all(promises);
+  let startTime = [];
 
-  // write data into DB
-  let insertPromises = eventListDetails.map((e) => {
-    return Recruiter.create({
-      createdTime: e.collection[0].created_at,
-      phoneNumber: e.collection[0].email,
-      startTime: e.collection[0].email,
-      interviewerName: e.collection[0].name,
-      companyName: e.collection[0].questions_and_answers[0].answer,
-      roleName: e.collection[0].questions_and_answers[1].answer,
-      kindOfInterview: e.collection[0].questions_and_answers[2].answer,
-      extraNotes: e.collection[0].questions_and_answers[3]
-        ? e.collection[0].questions_and_answers[3].answer
-        : "",
+  try {
+    eventList.collection.forEach((e) => {
+      startTime.push(e.start_time);
+      let eventDetailOptions = {
+        host: "api.calendly.com",
+        port: 443,
+        path: `/scheduled_events/${e.uri.split("/").pop()}/invitees`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${calendlyKey}`,
+        },
+      };
+      promises.push(httpRequest(eventDetailOptions));
     });
-  });
-  let dbInsertResult = await Promise.all(insertPromises);
-  res.send(dbInsertResult);
+
+    let eventListDetails = await Promise.all(promises);
+
+    // write data into DB
+    let insertPromises = await asyncFilter(eventListDetails, async (e, i) => {
+      let cnt = await Recruiter.count({
+        where: { eventUid: e.collection[0].event.split("/").pop() },
+      });
+      // console.log(cnt);
+      if (cnt === 0) return true;
+      else return false;
+    });
+    console.log(insertPromises);
+    let dbInsertResult = {};
+    if (!(insertPromises && Object.keys(insertPromises).length === 0)) {
+      insertPromises.map((e, i) => {
+        return Recruiter.create({
+          createdTime: e.collection[0].created_at,
+          eventUid: e.collection[0].event.split("/").pop(),
+          startTime: startTime[i],
+          interviewerName: e.collection[0].name,
+          companyName: e.collection[0].questions_and_answers[0].answer,
+          roleName: e.collection[0].questions_and_answers[1].answer,
+          kindOfInterview: e.collection[0].questions_and_answers[2].answer,
+          extraNotes: e.collection[0].questions_and_answers[3]
+            ? e.collection[0].questions_and_answers[3].answer
+            : "",
+        });
+      });
+      dbInsertResult = await Promise.all(insertPromises);
+    }
+
+    res.send(dbInsertResult);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 //Retrieve all recruiters from the database
 exports.findAll = (req, res) => {
-  console.log("findall is working");
-  //   const interviewer_name = req.query.interviewerName;
-  //   let condition = interviewer_name
-  //     ? { interviewer_name: { [Op.like]: `%${interviewer_name}%` } }
-  //     : null;
+  let todayTime = new Date(new Date().toUTCString());
+  ("2021-11-08T18:35:47.000Z");
+  console.log(todayTime);
   Recruiter.findAll({})
     .then((data) => {
-      console.log(data);
       res.send(data);
     })
     .catch((err) => {

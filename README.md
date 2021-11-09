@@ -10,7 +10,7 @@ npx sequelize-cli model:generate --name User --attributes first_name:string,last
 
 npx sequelize-cli model:generate --name Company --attributes company_size:string,company_name:string,company_location:string,job_role:string,job_type:string,job_rating:string,job_how:string,job_where:string,job_req:text,job_skills:string,social_account:string,reg_date:string,reg_weekday:string
 
-npx sequelize-cli model:generate --name Recruiter --attributes created_time:string,phone_number:string,start_time:string,interviewer_name:string,company_name:string,role_name:string,kind_of_interview:string,extra_notes:string
+npx sequelize-cli model:generate --name Recruiter --attributes event_uid:string,created_time:string,start_time:string,interviewer_name:string,company_name:string,role_name:string,kind_of_interview:string,extra_notes:string
 
 ## Run migrate
 
