@@ -4,7 +4,6 @@ import apiRecruiters from "services/api/recruiters";
 function* loadRecruiters(action) {
   try {
     yield call(apiRecruiters.load, action.payload);
-    console.log("action.payload", action.payload);
     const recruiters = yield call(apiRecruiters.getAll);
     yield put({ type: "GET_RECRUITERS_SUCCESS", recruiters: recruiters });
   } catch (e) {

@@ -32,7 +32,6 @@ export const RecruiterContainer = () => {
     });
   }
 
-  console.log("mapRecruiters", mapRecruiters);
   const loading = useSelector((state) => state.recruiters.loading);
   const error = useSelector((state) => state.recruiters.error);
 
@@ -42,6 +41,7 @@ export const RecruiterContainer = () => {
   }, [dispatch]);
 
   const onClickReload = () => {
+    console.log(startDateTime);
     dispatch(loadRecruiters({ startDateTime: startDateTime }));
   };
 
