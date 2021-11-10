@@ -140,3 +140,53 @@ export const convertLocaleTime = (time, locale) => {
     timeZone: locale,
   });
 };
+
+export const scheduleColumnsConfig = [
+  {
+    field: "createdTime",
+    headerName: "Created",
+    width: 250,
+    editable: true,
+  },
+  {
+    field: "startTime",
+    headerName: "Start Time ( UTC - 6 )",
+    width: 250,
+    editable: true,
+  },
+  {
+    field: "startTimeLocal",
+    headerName: "Start Time ( UTC + 8 )",
+    width: 250,
+    editable: true,
+  },
+  {
+    field: "interviewerName",
+    headerName: "Interviewer Name",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "companyName",
+    headerName: "Company Name",
+    width: 200,
+    editable: true,
+  },
+  {
+    field: "roleName",
+    headerName: "Role Name",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "kindOfInterview",
+    headerName: "Kind Of Interview",
+    width: 200,
+  },
+  {
+    field: "extraNotes",
+    headerName: "Anything sharing",
+    width: 400,
+    editable: true,
+  },
+];

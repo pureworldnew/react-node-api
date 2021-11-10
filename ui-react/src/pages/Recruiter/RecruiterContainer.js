@@ -11,16 +11,14 @@ import { convertLocaleTime } from "config";
 import ApiCalendar from "react-google-calendar-api";
 
 export const RecruiterContainer = () => {
-  const [startDateTime, setStartDateTime] = useState(new Date().toUTCString());
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.recruiters.loading);
+  const error = useSelector((state) => state.recruiters.error);
+  const recruiters = useSelector((state) => state.recruiters.recruiters);
 
+  const [startDateTime, setStartDateTime] = useState(new Date().toUTCString());
   const [googleSignin, setGoogleSignin] = useState(false);
 
-  const handleDateTimeChange = (newValue) => {
-    setStartDateTime(newValue);
-  };
-  const dispatch = useDispatch();
-
-  const recruiters = useSelector((state) => state.recruiters.recruiters);
   let mapRecruiters = [];
   if (recruiters) {
     mapRecruiters = recruiters.map((e) => {
@@ -32,9 +30,6 @@ export const RecruiterContainer = () => {
       };
     });
   }
-
-  const loading = useSelector((state) => state.recruiters.loading);
-  const error = useSelector((state) => state.recruiters.error);
 
   useEffect(() => {
     dispatch(getRecruiters());
@@ -62,6 +57,10 @@ export const RecruiterContainer = () => {
     }
     return () => {};
   }, []);
+
+  const handleDateTimeChange = (newValue) => {
+    setStartDateTime(newValue);
+  };
 
   const onClickReload = () => {
     dispatch(loadRecruiters({ startDateTime: startDateTime }));

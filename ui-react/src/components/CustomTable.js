@@ -2,7 +2,7 @@ import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import CustomSkeleton from "components/CustomSkeleton";
 
-const RecruiterList = ({ loading, error, data, columns }) => {
+const CustomTable = ({ loading, error, data, columns }) => {
   if (loading) {
     return <CustomSkeleton />;
   }
@@ -10,6 +10,9 @@ const RecruiterList = ({ loading, error, data, columns }) => {
   if (error) {
     return <div style={{ color: "red" }}>ERROR: {error}</div>;
   }
+  // if (!data.length) {
+  //   return <div style={{ color: "red" }}>No Result</div>;
+  // }
 
   return (
     <DataGrid
@@ -23,4 +26,4 @@ const RecruiterList = ({ loading, error, data, columns }) => {
   );
 };
 
-export default RecruiterList;
+export default CustomTable;

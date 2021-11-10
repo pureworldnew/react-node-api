@@ -21,7 +21,6 @@ import Login from "./Auth/Login";
 import { AuthorizedPage1 } from "pages/AuthorizedPage1";
 import PrivateRoute from "./Auth/PrivateRoute";
 import { Schedule } from "pages/Schedule";
-
 import { Technical } from "pages/Technical";
 import { Final } from "pages/Final";
 import { Offer } from "pages/Offer";

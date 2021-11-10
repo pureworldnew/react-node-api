@@ -1,8 +1,8 @@
 import React from "react";
-import RecruiterList from "./components/RecruiterList";
-import { Heading } from "components/Heading";
+import Heading from "components/Heading";
 import { Button, Paper, Box } from "@mui/material";
 import DateTimePickerComponent from "components/DateTimePickerComponent";
+import CustomTable from "components/CustomTable";
 
 const RecruiterView = ({
   loading,
@@ -24,7 +24,7 @@ const RecruiterView = ({
         width: "100%",
       }}
     >
-      <Heading>Recruiter</Heading>
+      <Heading>Recruiters By Calendly</Heading>
       <Box
         sx={{
           display: "flex",
@@ -62,7 +62,7 @@ const RecruiterView = ({
         </Paper>
       </Box>
 
-      <RecruiterList
+      <CustomTable
         loading={loading}
         error={error}
         data={data}

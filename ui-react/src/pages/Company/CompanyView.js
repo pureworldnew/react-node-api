@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import CompanyForm from "pages/Company/components/CompanyForm";
 import CompanyList from "pages/Company/components/CompanyList";
-import { Heading } from "components/Heading";
+import Heading from "components/Heading";
 
 const MemoCompanyForm = memo(CompanyForm);
 
