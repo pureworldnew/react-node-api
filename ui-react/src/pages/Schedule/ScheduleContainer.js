@@ -13,9 +13,10 @@ export const ScheduleContainer = () => {
 
   const [googleSignin, setGoogleSignin] = useState(ApiCalendar.sign);
   const [calData, setCalData] = useState([]);
-  const [dateRange, setDateRange] = React.useState([null, null]);
-
-  console.log(dateRange);
+  const [dateRange, setDateRange] = React.useState([
+    new Date().toUTCString(),
+    new Date().toUTCString(),
+  ]);
 
   useEffect(() => {
     if (googleSignin && dateRange[0] && dateRange[1]) {
@@ -33,7 +34,6 @@ export const ScheduleContainer = () => {
         maxResults: 100,
         orderBy: "startTime",
       }).then(({ result }) => {
-        console.log(result);
         let tableData = [];
         result.items.forEach((e) => {
           let obj = {};
@@ -50,6 +50,8 @@ export const ScheduleContainer = () => {
                 obj["roleName"] = e["Which position is this meeting for?"];
               } else if (e["Role of Interviewer"]) {
                 obj["kindOfInterview"] = e["Role of Interviewer"];
+              } else if (e["Phone Number"]) {
+                obj["phoneNumber"] = e["Phone Number"];
               }
             });
           }
@@ -67,7 +69,6 @@ export const ScheduleContainer = () => {
           obj["location"] = e.location;
           tableData.push(obj);
         });
-        console.log(tableData);
         setCalData(tableData);
       });
     }

@@ -136,9 +136,15 @@ export const companyColumnsConfig = [
 ];
 export const scheduleColumnsConfig = [
   {
-    field: "created",
-    headerName: "Created",
-    width: 200,
+    field: "companyName",
+    headerName: "Company Name",
+    width: 250,
+    editable: true,
+  },
+  {
+    field: "location",
+    headerName: "Location",
+    width: 150,
     editable: true,
   },
   {
@@ -160,6 +166,18 @@ export const scheduleColumnsConfig = [
     editable: true,
   },
   {
+    field: "roleName",
+    headerName: "Role Name",
+    width: 250,
+    editable: true,
+  },
+  {
+    field: "phoneNumber",
+    headerName: "Phone Number",
+    width: 150,
+    editable: true,
+  },
+  {
     field: "creator",
     headerName: "Creator",
     width: 200,
@@ -178,27 +196,15 @@ export const scheduleColumnsConfig = [
     editable: true,
   },
   {
-    field: "companyName",
-    headerName: "Company Name",
-    width: 250,
-    editable: true,
-  },
-  {
-    field: "roleName",
-    headerName: "Role Name",
-    width: 250,
-    editable: true,
-  },
-  {
     field: "kindOfInterview",
     headerName: "Kind Of Interview",
     width: 250,
     editable: true,
   },
   {
-    field: "location",
-    headerName: "Location",
-    width: 150,
+    field: "created",
+    headerName: "Created",
+    width: 200,
     editable: true,
   },
 ];

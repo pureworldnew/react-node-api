@@ -1,8 +1,8 @@
 import React from "react";
 import Heading from "components/Heading";
 import { Button, Paper, Box } from "@mui/material";
-import DateTimePickerComponent from "components/DateTimePickerComponent";
 import CustomTable from "components/CustomTable";
+import CustomDateRangePicker from "components/CustomDateRangePicker";
 
 const RecruiterView = ({
   loading,
@@ -10,8 +10,8 @@ const RecruiterView = ({
   data,
   columns,
   onClickReload,
-  startDateTime,
-  handleDateTimeChange,
+  dateRange,
+  setDateRange,
   onClickRemoveAll,
 }) => {
   return (
@@ -32,11 +32,11 @@ const RecruiterView = ({
           marginBottom: "16px",
         }}
       >
-        <Paper elevation={3} sx={{ padding: "15px" }}>
-          <DateTimePickerComponent
-            value={startDateTime}
-            handleChange={handleDateTimeChange}
-          />
+        <Paper
+          elevation={3}
+          sx={{ display: "flex", flexDirection: "row", padding: "15px" }}
+        >
+          <CustomDateRangePicker value={dateRange} setValue={setDateRange} />
           <Button
             variant="outlined"
             onClick={onClickReload}

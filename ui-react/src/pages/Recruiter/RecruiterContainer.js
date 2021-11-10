@@ -15,7 +15,15 @@ export const RecruiterContainer = () => {
   const error = useSelector((state) => state.recruiters.error);
   const recruiters = useSelector((state) => state.recruiters.recruiters);
 
-  const [startDateTime, setStartDateTime] = useState(new Date().toUTCString());
+  const [dateRange, setDateRange] = useState([
+    new Date().toUTCString(),
+    new Date().toUTCString(),
+  ]);
+
+  useEffect(() => {
+    dispatch(getRecruiters());
+    return () => {};
+  }, [dispatch]);
 
   let mapRecruiters = [];
   if (recruiters) {
@@ -29,18 +37,12 @@ export const RecruiterContainer = () => {
     });
   }
 
-  useEffect(() => {
-    dispatch(getRecruiters());
-    return () => {};
-  }, [dispatch]);
-
-  const handleDateTimeChange = (newValue) => {
-    console.log(newValue);
-    setStartDateTime(newValue);
-  };
-
   const onClickReload = () => {
-    dispatch(loadRecruiters({ startDateTime: startDateTime }));
+    if (dateRange[0] && dateRange[1]) {
+      dispatch(
+        loadRecruiters({ minDateTime: dateRange[0], maxDateTime: dateRange[1] })
+      );
+    }
   };
 
   const onClickRemoveAll = () => {
@@ -52,10 +54,10 @@ export const RecruiterContainer = () => {
       loading={loading}
       error={error}
       data={mapRecruiters}
-      startDateTime={startDateTime}
+      dateRange={dateRange}
       columns={recruiterColumnsConfig}
       onClickReload={onClickReload}
-      handleDateTimeChange={handleDateTimeChange}
+      setDateRange={setDateRange}
       onClickRemoveAll={onClickRemoveAll}
     />
   );

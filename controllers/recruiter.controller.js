@@ -69,10 +69,16 @@ exports.load = async (req, res) => {
   let timezone = result.resource.timezone;
   let organization = result.resource.current_organization;
   let status = "active";
-  let dateTime = new Date(req.body.startDateTime);
-  let min_start_time = JSON.stringify(new Date(dateTime.setHours(0, 0, 0, 0)));
-  let max_start_time = JSON.stringify(new Date(dateTime.setHours(24, 0, 0, 0)));
-  let path = `/scheduled_events?organization=${organization}&status=${status}&min_start_time=${min_start_time.substring(
+  let count = 90;
+  let minDateTime = new Date(req.body.minDateTime);
+  let maxDateTime = new Date(req.body.maxDateTime);
+  let min_start_time = JSON.stringify(
+    new Date(minDateTime.setHours(0, 0, 0, 0))
+  );
+  let max_start_time = JSON.stringify(
+    new Date(maxDateTime.setHours(24, 0, 0, 0))
+  );
+  let path = `/scheduled_events?count=${count}&organization=${organization}&status=${status}&min_start_time=${min_start_time.substring(
     1,
     min_start_time.length - 1
   )}&max_start_time=${max_start_time.substring(1, min_start_time.length - 1)}`;

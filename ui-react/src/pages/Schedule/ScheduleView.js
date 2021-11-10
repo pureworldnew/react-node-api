@@ -31,7 +31,10 @@ const ScheduleView = ({
           marginBottom: "16px",
         }}
       >
-        <Paper elevation={3} sx={{ padding: "15px" }}>
+        <Paper
+          elevation={3}
+          sx={{ display: "flex", flexDirection: "row", padding: "15px" }}
+        >
           <CustomDateRangePicker value={dateRange} setValue={setDateRange} />
           <Button
             variant="outlined"
