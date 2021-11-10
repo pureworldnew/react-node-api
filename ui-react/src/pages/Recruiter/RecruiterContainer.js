@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import RecruiterView from "./RecruiterView";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -8,11 +8,12 @@ import {
 } from "redux/actions/recruiterAction";
 import { recruiterColumnsConfig } from "config";
 import { convertLocaleTime } from "config";
+import ApiCalendar from "react-google-calendar-api";
 
 export const RecruiterContainer = () => {
-  const [startDateTime, setStartDateTime] = React.useState(
-    new Date().toUTCString()
-  );
+  const [startDateTime, setStartDateTime] = useState(new Date().toUTCString());
+
+  const [googleSignin, setGoogleSignin] = useState(false);
 
   const handleDateTimeChange = (newValue) => {
     setStartDateTime(newValue);
@@ -40,13 +41,41 @@ export const RecruiterContainer = () => {
     return () => {};
   }, [dispatch]);
 
+  useEffect(() => {
+    if (ApiCalendar.sign) {
+      let minDate = new Date();
+      minDate.setDate(minDate.getDate() - 7);
+      let min = new Date(minDate).toISOString();
+      let maxDate = new Date();
+      maxDate.setDate(maxDate.getDate() + 7);
+      let max = new Date(maxDate).toISOString();
+      ApiCalendar.listEvents({
+        timeMin: min,
+        timeMax: max,
+        showDeleted: false,
+        singleEvents: true,
+        maxResults: 20,
+        orderBy: "startTime",
+      }).then(({ result }) => {
+        console.log(result.items);
+      });
+    }
+    return () => {};
+  }, []);
+
   const onClickReload = () => {
-    console.log(startDateTime);
     dispatch(loadRecruiters({ startDateTime: startDateTime }));
   };
 
   const onClickRemoveAll = () => {
     dispatch(removeAllRecruiters("All"));
+  };
+
+  const onClickAddNew = async () => {
+    await ApiCalendar.handleAuthClick();
+    setGoogleSignin(ApiCalendar.sign);
+
+    console.log("google signin", googleSignin);
   };
   return (
     <RecruiterView
@@ -58,6 +87,7 @@ export const RecruiterContainer = () => {
       onClickReload={onClickReload}
       handleDateTimeChange={handleDateTimeChange}
       onClickRemoveAll={onClickRemoveAll}
+      onClickAddNew={onClickAddNew}
     />
   );
 };

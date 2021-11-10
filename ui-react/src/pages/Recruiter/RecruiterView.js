@@ -13,6 +13,7 @@ const RecruiterView = ({
   startDateTime,
   handleDateTimeChange,
   onClickRemoveAll,
+  onClickAddNew,
 }) => {
   return (
     <div
@@ -37,6 +38,13 @@ const RecruiterView = ({
             value={startDateTime}
             handleChange={handleDateTimeChange}
           />
+          <Button
+            variant="outlined"
+            onClick={onClickAddNew}
+            sx={{ margin: "5px" }}
+          >
+            Login to calendar
+          </Button>
           <Button
             variant="outlined"
             onClick={onClickReload}
