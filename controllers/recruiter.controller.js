@@ -69,11 +69,15 @@ exports.load = async (req, res) => {
   let timezone = result.resource.timezone;
   let organization = result.resource.current_organization;
   let status = "active";
-  let min_start_time = JSON.stringify(new Date(req.body.startDateTime));
+  let dateTime = new Date(req.body.startDateTime);
+  let min_start_time = JSON.stringify(new Date(dateTime.setHours(0, 0, 0, 0)));
+  let max_start_time = JSON.stringify(new Date(dateTime.setHours(24, 0, 0, 0)));
   let path = `/scheduled_events?organization=${organization}&status=${status}&min_start_time=${min_start_time.substring(
     1,
     min_start_time.length - 1
-  )}`;
+  )}&max_start_time=${max_start_time.substring(1, min_start_time.length - 1)}`;
+
+  console.log("path", path);
 
   const eventListOptions = {
     host: "api.calendly.com",

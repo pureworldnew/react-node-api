@@ -35,6 +35,7 @@ export const RecruiterContainer = () => {
   }, [dispatch]);
 
   const handleDateTimeChange = (newValue) => {
+    console.log(newValue);
     setStartDateTime(newValue);
   };
 

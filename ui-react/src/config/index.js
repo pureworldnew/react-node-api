@@ -134,59 +134,65 @@ export const companyColumnsConfig = [
     width: 100,
   },
 ];
-
-export const convertLocaleTime = (time, locale) => {
-  return new Date(time).toLocaleString("en-US", {
-    timeZone: locale,
-  });
-};
 export const scheduleColumnsConfig = [
   {
     field: "created",
     headerName: "Created",
-    width: 250,
-    editable: true,
-  },
-  {
-    field: "creator",
-    headerName: "Creator",
-    width: 100,
-    editable: true,
-  },
-  {
-    field: "id",
-    headerName: "Id",
-    width: 50,
-    editable: true,
-  },
-  {
-    field: "description",
-    headerName: "Description",
-    width: 250,
+    width: 200,
     editable: true,
   },
   {
     field: "startDateTime",
     headerName: "Start Time ( UTC - 6 )",
-    width: 250,
+    width: 200,
     editable: true,
   },
   {
-    field: "startDateTimeZone",
-    headerName: "start Date timezone",
-    width: 100,
+    field: "startDateTimeLocal",
+    headerName: "Start Time ( UTC + 8 )",
+    width: 200,
     editable: true,
   },
   {
     field: "summary",
     headerName: "Summary",
-    width: 100,
+    width: 300,
+    editable: true,
+  },
+  {
+    field: "creator",
+    headerName: "Creator",
+    width: 200,
     editable: true,
   },
   {
     field: "organizer",
-    headerName: "organizer",
-    width: 100,
+    headerName: "Organizer",
+    width: 200,
+    editable: true,
+  },
+  {
+    field: "eventName",
+    headerName: "Event Name",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "companyName",
+    headerName: "Company Name",
+    width: 250,
+    editable: true,
+  },
+  {
+    field: "roleName",
+    headerName: "Role Name",
+    width: 250,
+    editable: true,
+  },
+  {
+    field: "kindOfInterview",
+    headerName: "Kind Of Interview",
+    width: 250,
     editable: true,
   },
   {
@@ -196,3 +202,21 @@ export const scheduleColumnsConfig = [
     editable: true,
   },
 ];
+export const convertLocaleTime = (time, locale) => {
+  return new Date(time).toLocaleString("en-US", {
+    timeZone: locale,
+  });
+};
+
+export const parseDescription = (str) => {
+  return str
+    .split(/\r?\n/)
+    .filter((e) => {
+      return e.length > 0 && e.split(":").length === 2;
+    })
+    .map((e) => {
+      let obj = {};
+      obj[e.split(":")[0]] = e.split(":")[1];
+      return obj;
+    });
+};

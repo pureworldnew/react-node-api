@@ -2,8 +2,17 @@ import React from "react";
 import Heading from "components/Heading";
 import { Button, Paper, Box } from "@mui/material";
 import CustomTable from "components/CustomTable";
+import CustomDateRangePicker from "components/CustomDateRangePicker";
 
-const ScheduleView = ({ loading, error, data, columns, connectGCalendar }) => {
+const ScheduleView = ({
+  loading,
+  error,
+  data,
+  columns,
+  connectGCalendar,
+  dateRange,
+  setDateRange,
+}) => {
   return (
     <div
       style={{
@@ -23,10 +32,7 @@ const ScheduleView = ({ loading, error, data, columns, connectGCalendar }) => {
         }}
       >
         <Paper elevation={3} sx={{ padding: "15px" }}>
-          {/* <DateTimePickerComponent
-            value={startDateTime}
-            handleChange={handleDateTimeChange}
-          /> */}
+          <CustomDateRangePicker value={dateRange} setValue={setDateRange} />
           <Button
             variant="outlined"
             onClick={connectGCalendar}
@@ -34,20 +40,6 @@ const ScheduleView = ({ loading, error, data, columns, connectGCalendar }) => {
           >
             Connect to calendar
           </Button>
-          {/* <Button
-            variant="outlined"
-            onClick={onClickReload}
-            sx={{ margin: "5px" }}
-          >
-            Reload
-          </Button> */}
-          {/* <Button
-            variant="outlined"
-            onClick={onClickRemoveAll}
-            sx={{ margin: "5px" }}
-          >
-            Remove All
-          </Button> */}
         </Paper>
       </Box>
       <CustomTable
