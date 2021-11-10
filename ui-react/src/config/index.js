@@ -140,53 +140,59 @@ export const convertLocaleTime = (time, locale) => {
     timeZone: locale,
   });
 };
-
 export const scheduleColumnsConfig = [
   {
-    field: "createdTime",
+    field: "created",
     headerName: "Created",
     width: 250,
     editable: true,
   },
   {
-    field: "startTime",
+    field: "creator",
+    headerName: "Creator",
+    width: 100,
+    editable: true,
+  },
+  {
+    field: "id",
+    headerName: "Id",
+    width: 50,
+    editable: true,
+  },
+  {
+    field: "description",
+    headerName: "Description",
+    width: 250,
+    editable: true,
+  },
+  {
+    field: "startDateTime",
     headerName: "Start Time ( UTC - 6 )",
     width: 250,
     editable: true,
   },
   {
-    field: "startTimeLocal",
-    headerName: "Start Time ( UTC + 8 )",
-    width: 250,
+    field: "startDateTimeZone",
+    headerName: "start Date timezone",
+    width: 100,
     editable: true,
   },
   {
-    field: "interviewerName",
-    headerName: "Interviewer Name",
+    field: "summary",
+    headerName: "Summary",
+    width: 100,
+    editable: true,
+  },
+  {
+    field: "organizer",
+    headerName: "organizer",
+    width: 100,
+    editable: true,
+  },
+  {
+    field: "location",
+    headerName: "Location",
     width: 150,
-    editable: true,
-  },
-  {
-    field: "companyName",
-    headerName: "Company Name",
-    width: 200,
-    editable: true,
-  },
-  {
-    field: "roleName",
-    headerName: "Role Name",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "kindOfInterview",
-    headerName: "Kind Of Interview",
-    width: 200,
-  },
-  {
-    field: "extraNotes",
-    headerName: "Anything sharing",
-    width: 400,
     editable: true,
   },
 ];

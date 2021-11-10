@@ -8,7 +8,6 @@ import {
 } from "redux/actions/recruiterAction";
 import { recruiterColumnsConfig } from "config";
 import { convertLocaleTime } from "config";
-import ApiCalendar from "react-google-calendar-api";
 
 export const RecruiterContainer = () => {
   const dispatch = useDispatch();
@@ -17,7 +16,6 @@ export const RecruiterContainer = () => {
   const recruiters = useSelector((state) => state.recruiters.recruiters);
 
   const [startDateTime, setStartDateTime] = useState(new Date().toUTCString());
-  const [googleSignin, setGoogleSignin] = useState(false);
 
   let mapRecruiters = [];
   if (recruiters) {
@@ -36,28 +34,6 @@ export const RecruiterContainer = () => {
     return () => {};
   }, [dispatch]);
 
-  useEffect(() => {
-    if (ApiCalendar.sign) {
-      let minDate = new Date();
-      minDate.setDate(minDate.getDate() - 7);
-      let min = new Date(minDate).toISOString();
-      let maxDate = new Date();
-      maxDate.setDate(maxDate.getDate() + 7);
-      let max = new Date(maxDate).toISOString();
-      ApiCalendar.listEvents({
-        timeMin: min,
-        timeMax: max,
-        showDeleted: false,
-        singleEvents: true,
-        maxResults: 20,
-        orderBy: "startTime",
-      }).then(({ result }) => {
-        console.log(result.items);
-      });
-    }
-    return () => {};
-  }, []);
-
   const handleDateTimeChange = (newValue) => {
     setStartDateTime(newValue);
   };
@@ -70,12 +46,6 @@ export const RecruiterContainer = () => {
     dispatch(removeAllRecruiters("All"));
   };
 
-  const onClickAddNew = async () => {
-    await ApiCalendar.handleAuthClick();
-    setGoogleSignin(ApiCalendar.sign);
-
-    console.log("google signin", googleSignin);
-  };
   return (
     <RecruiterView
       loading={loading}
@@ -86,7 +56,6 @@ export const RecruiterContainer = () => {
       onClickReload={onClickReload}
       handleDateTimeChange={handleDateTimeChange}
       onClickRemoveAll={onClickRemoveAll}
-      onClickAddNew={onClickAddNew}
     />
   );
 };
