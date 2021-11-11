@@ -3,6 +3,7 @@ import Heading from "components/Heading";
 import { Button, Paper, Box } from "@mui/material";
 import CustomTable from "components/CustomTable";
 import CustomDateRangePicker from "components/CustomDateRangePicker";
+import ConfirmDialog from "components/ConfirmDialog";
 
 const RecruiterView = ({
   loading,
@@ -12,7 +13,12 @@ const RecruiterView = ({
   onClickReload,
   dateRange,
   setDateRange,
-  onClickRemoveAll,
+  dialogOpen,
+  handleClickOpen,
+  handleClose,
+  handleConfirm,
+  confirmText,
+  confirmTitle,
 }) => {
   return (
     <div
@@ -24,6 +30,13 @@ const RecruiterView = ({
       }}
     >
       <Heading>Recruiters By Calendly</Heading>
+      <ConfirmDialog
+        confirmTitle={confirmTitle}
+        confirmText={confirmText}
+        dialogOpen={dialogOpen}
+        handleClose={handleClose}
+        handleConfirm={handleConfirm}
+      />
       <Box
         sx={{
           display: "flex",
@@ -46,7 +59,7 @@ const RecruiterView = ({
           </Button>
           <Button
             variant="outlined"
-            onClick={onClickRemoveAll}
+            onClick={handleClickOpen}
             sx={{ margin: "5px" }}
           >
             Remove All

@@ -8,6 +8,7 @@ import {
 } from "redux/actions/recruiterAction";
 import { recruiterColumnsConfig } from "config";
 import { convertLocaleTime } from "config";
+import { CONFIRM_DIALOG_TITLE, RECRUITER_REMOVE_ALL } from "config/CONSTANTS";
 
 export const RecruiterContainer = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,8 @@ export const RecruiterContainer = () => {
     new Date().toUTCString(),
     new Date().toUTCString(),
   ]);
+
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getRecruiters());
@@ -45,7 +48,16 @@ export const RecruiterContainer = () => {
     }
   };
 
-  const onClickRemoveAll = () => {
+  const handleClickOpen = () => {
+    setDialogOpen(true);
+  };
+
+  const handleClose = () => {
+    setDialogOpen(false);
+  };
+
+  const handleConfirm = () => {
+    setDialogOpen(false);
     dispatch(removeAllRecruiters("All"));
   };
 
@@ -58,7 +70,12 @@ export const RecruiterContainer = () => {
       columns={recruiterColumnsConfig}
       onClickReload={onClickReload}
       setDateRange={setDateRange}
-      onClickRemoveAll={onClickRemoveAll}
+      dialogOpen={dialogOpen}
+      handleClickOpen={handleClickOpen}
+      handleClose={handleClose}
+      handleConfirm={handleConfirm}
+      confirmText={RECRUITER_REMOVE_ALL}
+      confirmTitle={CONFIRM_DIALOG_TITLE}
     />
   );
 };
