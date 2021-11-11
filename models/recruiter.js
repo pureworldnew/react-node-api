@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       createdTime: DataTypes.STRING,
       startTime: DataTypes.STRING,
       interviewerName: DataTypes.STRING,
+      phoneNumber: DataTypes.STRING,
       companyName: DataTypes.STRING,
       roleName: DataTypes.STRING,
       kindOfInterview: DataTypes.STRING,

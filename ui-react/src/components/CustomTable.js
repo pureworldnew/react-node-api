@@ -10,9 +10,6 @@ const CustomTable = ({ loading, error, data, columns }) => {
   if (error) {
     return <div style={{ color: "red" }}>ERROR: {error}</div>;
   }
-  // if (!data.length) {
-  //   return <div style={{ color: "red" }}>No Result</div>;
-  // }
 
   return (
     <DataGrid

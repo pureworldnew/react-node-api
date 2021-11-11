@@ -10,21 +10,9 @@ export const dateConfig = {
 
 export const recruiterColumnsConfig = [
   {
-    field: "createdTime",
-    headerName: "Created",
-    width: 250,
-    editable: true,
-  },
-  {
-    field: "startTime",
-    headerName: "Start Time ( UTC - 6 )",
-    width: 250,
-    editable: true,
-  },
-  {
-    field: "startTimeLocal",
-    headerName: "Start Time ( UTC + 8 )",
-    width: 250,
+    field: "companyName",
+    headerName: "Company Name",
+    width: 200,
     editable: true,
   },
   {
@@ -34,8 +22,21 @@ export const recruiterColumnsConfig = [
     editable: true,
   },
   {
-    field: "companyName",
-    headerName: "Company Name",
+    field: "phoneNumber",
+    headerName: "Phone Number",
+    width: 150,
+    editable: true,
+  },
+
+  {
+    field: "startTime",
+    headerName: "Start Time ( UTC - 6 )",
+    width: 200,
+    editable: true,
+  },
+  {
+    field: "startTimeLocal",
+    headerName: "Start Time ( UTC + 8 )",
     width: 200,
     editable: true,
   },
@@ -54,6 +55,12 @@ export const recruiterColumnsConfig = [
     field: "extraNotes",
     headerName: "Anything sharing",
     width: 400,
+    editable: true,
+  },
+  {
+    field: "createdTime",
+    headerName: "Created",
+    width: 200,
     editable: true,
   },
 ];
@@ -142,6 +149,12 @@ export const scheduleColumnsConfig = [
     editable: true,
   },
   {
+    field: "summary",
+    headerName: "Summary",
+    width: 300,
+    editable: true,
+  },
+  {
     field: "location",
     headerName: "Location",
     width: 150,
@@ -157,12 +170,6 @@ export const scheduleColumnsConfig = [
     field: "startDateTimeLocal",
     headerName: "Start Time ( UTC + 8 )",
     width: 200,
-    editable: true,
-  },
-  {
-    field: "summary",
-    headerName: "Summary",
-    width: 300,
     editable: true,
   },
   {

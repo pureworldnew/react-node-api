@@ -20,6 +20,9 @@ module.exports = {
       interviewer_name: {
         type: Sequelize.STRING,
       },
+      phone_number: {
+        type: Sequelize.STRING,
+      },
       company_name: {
         type: Sequelize.STRING,
       },

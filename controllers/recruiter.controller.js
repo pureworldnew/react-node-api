@@ -97,7 +97,6 @@ exports.load = async (req, res) => {
   };
 
   let eventList = await httpRequest(eventListOptions);
-  console.log("eventList", eventList);
   let promises = [];
 
   let startTime = [];
@@ -128,26 +127,39 @@ exports.load = async (req, res) => {
       if (cnt === 0) return true;
       else return false;
     });
+    console.log("insertPromises", insertPromises);
     let dbInsertResult = {};
     if (!(insertPromises && Object.keys(insertPromises).length === 0)) {
       insertPromises.map((e, i) => {
+        let phoneNumber = "";
+        let companyName = "";
+        let roleName = "";
+        let kindOfInterview = "";
+        let extraNotes = "";
+        e.collection[0].questions_and_answers.forEach((e) => {
+          if (e.question === "Phone Number") phoneNumber = e.answer;
+          else if (e.question === "Company or Client Name")
+            companyName = e.answer;
+          else if (e.question === "Which position is this meeting for?")
+            roleName = e.answer;
+          else if (e.question === "Role of Interviewer")
+            kindOfInterview = e.answer;
+          else if (
+            e.question ===
+            "Please share anything that will help prepare for our meeting."
+          )
+            extraNotes = e.answer;
+        });
         return Recruiter.create({
           createdTime: e.collection[0].created_at,
           eventUid: e.collection[0].event.split("/").pop(),
           startTime: startTime[i],
           interviewerName: e.collection[0].name,
-          companyName: e.collection[0].questions_and_answers[0]
-            ? e.collection[0].questions_and_answers[0].answer
-            : "",
-          roleName: e.collection[0].questions_and_answers[1]
-            ? e.collection[0].questions_and_answers[1].answer
-            : "",
-          kindOfInterview: e.collection[0].questions_and_answers[2]
-            ? e.collection[0].questions_and_answers[2].answer
-            : "",
-          extraNotes: e.collection[0].questions_and_answers[3]
-            ? e.collection[0].questions_and_answers[3].answer
-            : "",
+          phoneNumber: phoneNumber,
+          companyName: companyName,
+          roleName: roleName,
+          kindOfInterview: kindOfInterview,
+          extraNotes: extraNotes,
         });
       });
       dbInsertResult = await Promise.all(insertPromises);
