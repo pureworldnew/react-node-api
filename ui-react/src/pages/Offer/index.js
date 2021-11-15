@@ -2,7 +2,7 @@ import React from "react";
 import Heading from "components/Heading";
 import CustomSkeleton from "components/CustomSkeleton";
 
-export const Offer = () => {
+const Offer = () => {
   return (
     <div>
       <Heading>Offer</Heading>
@@ -10,3 +10,5 @@ export const Offer = () => {
     </div>
   );
 };
+
+export default Offer;

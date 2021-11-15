@@ -1,1 +1,2 @@
-export { CompanyContainer as Company } from "./CompanyContainer";
+import { CompanyContainer as Company } from "./CompanyContainer";
+export default Company;

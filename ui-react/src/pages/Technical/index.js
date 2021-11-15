@@ -3,7 +3,7 @@ import { CollapsibleTable } from "components/CollapsibleTable";
 import { CustomTablePagination } from "components/CustomTablePagination";
 import Heading from "components/Heading";
 
-export const Technical = () => {
+const Technical = () => {
   return (
     <div>
       <Heading>Technical</Heading>
@@ -12,3 +12,5 @@ export const Technical = () => {
     </div>
   );
 };
+
+export default Technical;

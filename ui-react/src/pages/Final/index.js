@@ -2,7 +2,7 @@ import React from "react";
 import CustomSkeleton from "components/CustomSkeleton";
 import Heading from "components/Heading";
 
-export const Final = () => {
+const Final = () => {
   return (
     <div>
       <Heading>Final</Heading>
@@ -10,3 +10,5 @@ export const Final = () => {
     </div>
   );
 };
+
+export default Final;

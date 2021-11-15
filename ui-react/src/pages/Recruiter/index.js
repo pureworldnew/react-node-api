@@ -1,1 +1,2 @@
-export { RecruiterContainer as Recruiter } from "./RecruiterContainer";
+import { RecruiterContainer as Recruiter } from "./RecruiterContainer";
+export default Recruiter;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import RecruiterView from "./RecruiterView";
 import { useSelector, useDispatch } from "react-redux";
 import {

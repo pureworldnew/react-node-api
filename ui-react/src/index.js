@@ -5,8 +5,6 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
-// configure apollo client
-
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
