@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import CompanyView from "./CompanyView";
 import { useSelector, useDispatch } from "react-redux";
 import * as yup from "yup";
@@ -59,9 +59,15 @@ export function CompanyContainer() {
   const selectedEditValue = useSelector(
     (state) => state.companies.selectedEditValue
   );
+  const componentIsMounted = useRef(true);
 
   useEffect(() => {
-    dispatch(getCompanies());
+    if (componentIsMounted) {
+      dispatch(getCompanies());
+    }
+    return () => {
+      componentIsMounted.current = false;
+    };
   }, [dispatch]);
 
   const handleClickSave = (data) => {
