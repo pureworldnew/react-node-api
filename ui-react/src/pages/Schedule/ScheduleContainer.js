@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import ScheduleView from "./ScheduleView";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { scheduleColumnsConfig, parseDescription } from "config";
 
 import ApiCalendar from "react-google-calendar-api";
 import { convertLocaleTime } from "config";
+import { loadSchedules } from "redux/actions/scheduleAction";
 
 export const ScheduleContainer = () => {
+  const dispatch = useDispatch();
   const loading = useSelector((state) => state.schedules.loading);
   const error = useSelector((state) => state.schedules.error);
   const schedules = useSelector((state) => state.schedules.schedules);
@@ -33,14 +35,15 @@ export const ScheduleContainer = () => {
           timeMax: max,
           showDeleted: false,
           singleEvents: true,
-          maxResults: 100,
+          maxResults: 200,
           orderBy: "startTime",
         }).then(({ result }) => {
           let tableData = [];
           result.items.forEach((e) => {
+            console.log(e);
             let obj = {};
             obj["creator"] = e.creator.email;
-            obj["id"] = e.id;
+            obj["scheduleId"] = e.id;
             if (e.description) {
               parseDescription(e.description).forEach((e) => {
                 if (e["Company or Client Name"]) {
@@ -64,10 +67,10 @@ export const ScheduleContainer = () => {
               e.start.dateTime,
               "Asia/Shanghai"
             );
-            obj["startDateTimeZone"] = e.start.timeZone;
             obj["summary"] = e.summary;
             obj["organizer"] = e.organizer.email;
             obj["location"] = e.location;
+            obj["created"] = convertLocaleTime(e.updated, "Asia/Shanghai");
             tableData.push(obj);
           });
           setCalData(tableData);
@@ -78,6 +81,14 @@ export const ScheduleContainer = () => {
       isComponentMounted.current = false;
     };
   }, [googleSignin, dateRange]);
+
+  useEffect(() => {
+    console.log("before dispatch");
+    dispatch(loadSchedules());
+    return () => {
+      console.log("calData");
+    };
+  }, [calData, dispatch]);
 
   const connectGCalendar = async () => {
     await ApiCalendar.handleAuthClick();

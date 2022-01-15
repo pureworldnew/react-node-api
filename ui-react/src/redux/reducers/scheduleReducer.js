@@ -24,6 +24,23 @@ export default function schedules(state = initialState, action) {
         loading: false,
         error: action.message,
       };
+    case type.LOAD_SCHEDULE_REQUESTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case type.LOAD_SCHEDULE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        schedules: action.schedules,
+      };
+    case type.LOAD_SCHEDULE_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.message,
+      };
     default:
       return state;
   }

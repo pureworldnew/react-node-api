@@ -12,6 +12,8 @@ npx sequelize-cli model:generate --name Company --attributes company_size:string
 
 npx sequelize-cli model:generate --name Recruiter --attributes event_uid:string,created_time:string,start_time:string,interviewer_name:string,phone_number:string,company_name:string,role_name:string,kind_of_interview:string,extra_notes:string
 
+npx sequelize-cli model:generate --name Schedule --attributes schedule_id:string,company_name:string,summary:string,location:string,start_date_time:string,start_date_time_local:string,role_name:string,phone_number:string,kind_of_interview:string,creator:string,organizer:string,event_name:string,created:string
+
 ## Run migrate
 
 npx sequelize-cli db:migrate

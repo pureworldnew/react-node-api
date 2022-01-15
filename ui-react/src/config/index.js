@@ -210,7 +210,7 @@ export const scheduleColumnsConfig = [
   },
   {
     field: "created",
-    headerName: "Created",
+    headerName: "Created ( UTC + 8 )",
     width: 200,
     editable: true,
   },
