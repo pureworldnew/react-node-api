@@ -3,6 +3,7 @@ import Heading from "components/Heading";
 import { Button, Paper, Box } from "@mui/material";
 import CustomTable from "components/CustomTable";
 import CustomDateRangePicker from "components/CustomDateRangePicker";
+import "./ScheduleView.css";
 
 const ScheduleView = ({
   loading,

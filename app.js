@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const path = require("path");
 
 const corsOptions = {
   origin: "http://localhost:3000",
@@ -16,9 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 const db = require("./models");
 db.sequelize.sync();
 
-app.get("/", (req, res) => {
-  res.json({ message: "API is working properly" });
-});
+app.use(express.static("ui-react/build"));
 
 require("./routes/user.routes")(app);
 require("./routes/auth.routes")(app);

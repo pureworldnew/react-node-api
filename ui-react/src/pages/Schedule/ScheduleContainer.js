@@ -39,7 +39,6 @@ export const ScheduleContainer = () => {
           let tableData = [];
           result.items.forEach((e) => {
             let obj = {};
-            obj["created"] = convertLocaleTime(e.created, "Asia/Shanghai");
             obj["creator"] = e.creator.email;
             obj["id"] = e.id;
             if (e.description) {
