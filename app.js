@@ -23,5 +23,6 @@ require("./routes/user.routes")(app);
 require("./routes/auth.routes")(app);
 require("./routes/company.routes")(app);
 require("./routes/recruiter.routes")(app);
+require("./routes/schedule.routes")(app);
 
 module.exports = app;

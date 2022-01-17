@@ -6,3 +6,10 @@ export function loadSchedules(schedules) {
     payload: schedules,
   };
 }
+
+export function getSchedules(searchCompanyName) {
+  return {
+    type: type.GET_SCHEDULE_REQUESTED,
+    payload: searchCompanyName,
+  };
+}

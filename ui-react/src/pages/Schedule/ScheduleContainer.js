@@ -5,15 +5,18 @@ import { scheduleColumnsConfig, parseDescription } from "config";
 
 import ApiCalendar from "react-google-calendar-api";
 import { convertLocaleTime } from "config";
-import { loadSchedules } from "redux/actions/scheduleAction";
+import { loadSchedules, getSchedules } from "redux/actions/scheduleAction";
 
 export const ScheduleContainer = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.schedules.loading);
   const error = useSelector((state) => state.schedules.error);
   const schedules = useSelector((state) => state.schedules.schedules);
+  const [searchCompanyName, setSearchCompanyName] = useState("");
 
-  const [googleSignin, setGoogleSignin] = useState(ApiCalendar.sign);
+  console.log("container schedules", schedules);
+
+  const [googleSignin, setGoogleSignin] = useState();
   const [calData, setCalData] = useState([]);
   const [dateRange, setDateRange] = React.useState([
     new Date().toUTCString(),
@@ -22,8 +25,17 @@ export const ScheduleContainer = () => {
   const isComponentMounted = useRef(true);
 
   useEffect(() => {
+    console.log("mounted");
+    dispatch(getSchedules());
+    return () => {
+      console.log("unmounted");
+    };
+  }, []);
+
+  useEffect(() => {
     if (isComponentMounted) {
       if (googleSignin && dateRange[0] && dateRange[1]) {
+        console.log("mounted again");
         let minDate = new Date(dateRange[0]);
         minDate.setHours(0, 0, 0, 0);
         let min = new Date(minDate).toISOString();
@@ -40,7 +52,6 @@ export const ScheduleContainer = () => {
         }).then(({ result }) => {
           let tableData = [];
           result.items.forEach((e) => {
-            console.log(e);
             let obj = {};
             obj["creator"] = e.creator.email;
             obj["scheduleId"] = e.id;
@@ -73,22 +84,14 @@ export const ScheduleContainer = () => {
             obj["created"] = convertLocaleTime(e.updated, "Asia/Shanghai");
             tableData.push(obj);
           });
-          setCalData(tableData);
+          dispatch(loadSchedules(tableData));
         });
       }
     }
     return () => {
       isComponentMounted.current = false;
     };
-  }, [googleSignin, dateRange]);
-
-  useEffect(() => {
-    console.log("before dispatch");
-    dispatch(loadSchedules());
-    return () => {
-      console.log("calData");
-    };
-  }, [calData, dispatch]);
+  }, [googleSignin, dateRange, dispatch]);
 
   const connectGCalendar = async () => {
     await ApiCalendar.handleAuthClick();
@@ -99,7 +102,7 @@ export const ScheduleContainer = () => {
     <ScheduleView
       loading={loading}
       error={error}
-      data={calData}
+      data={schedules}
       columns={scheduleColumnsConfig}
       connectGCalendar={connectGCalendar}
       dateRange={dateRange}
