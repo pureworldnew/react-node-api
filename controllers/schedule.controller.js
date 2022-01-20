@@ -79,14 +79,24 @@ exports.load = async (req, res) => {
 };
 
 exports.get = (req, res) => {
-  // const company_name = req.query.companyName;
-  // let condition = company_name
-  //   ? { company_name: { [Op.like]: `%${company_name}%` } }
-  //   : null;
-
-  searchByScheduleId("te4ovhl0dlu7orvhae24idksqggfgh");
-
-  Schedule.findAll({})
+  const searchCompany = req.query.searchCompany;
+  console.log("searchCompany", searchCompany);
+  Schedule.findAll({
+    where: {
+      [Op.or]: [
+        {
+          companyName: {
+            [Op.like]: `%${searchCompany}%`,
+          },
+        },
+        {
+          organizer: {
+            [Op.like]: `%${searchCompany}%`,
+          },
+        },
+      ],
+    },
+  })
     .then((schedules) => {
       res.json(schedules);
     })

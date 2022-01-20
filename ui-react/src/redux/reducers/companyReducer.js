@@ -8,6 +8,7 @@ const initialState = {
   modalFlag: "",
   selectedEditValue: {},
   selectedIds: null,
+  searchCompany: "",
 };
 
 export default function companies(state = initialState, action) {
@@ -112,6 +113,11 @@ export default function companies(state = initialState, action) {
       return {
         ...state,
         selectedIds: action.payload,
+      };
+    case type.SET_SEARCH_COMPANY:
+      return {
+        ...state,
+        searchCompany: action.payload,
       };
     default:
       return state;

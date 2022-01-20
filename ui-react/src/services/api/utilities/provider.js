@@ -12,6 +12,15 @@ const getAll = (resource) => {
 };
 
 /**@param {string} resource */
+/**@param {string} param */
+const getAllSearch = (resource, param) => {
+  return axios
+    .get(`${BASE_URL}/${resource}`, { params: { searchCompany: param } })
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+/**@param {string} resource */
 /**@param {string} startTime */
 const load = (resource, startTime) => {
   return axios
@@ -67,6 +76,7 @@ const remove = (resource, ids) => {
 
 export const apiProvider = {
   getAll,
+  getAllSearch,
   getSingle,
   post,
   put,

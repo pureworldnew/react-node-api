@@ -63,3 +63,7 @@ export function getSingleCompany(id) {
 export function addOpenModal() {
   return { type: type.ADD_OPEN_MODAL };
 }
+
+export function setSearchCompany(searchCompany) {
+  return { type: type.SET_SEARCH_COMPANY, payload: searchCompany };
+}

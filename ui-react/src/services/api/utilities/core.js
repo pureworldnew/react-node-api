@@ -8,6 +8,12 @@ export class ApiCore {
       };
     }
 
+    if (options.getAllSearch) {
+      this.getAllSearch = (param) => {
+        return apiProvider.getAllSearch(options.url, param);
+      };
+    }
+
     if (options.getSingle) {
       this.getSingle = (id) => {
         return apiProvider.getSingle(options.url, id);

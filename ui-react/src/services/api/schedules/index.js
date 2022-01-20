@@ -4,6 +4,7 @@ const url = "schedules";
 
 const apiSchedules = new ApiCore({
   getAll: true,
+  getAllSearch: true,
   getSingle: true,
   post: true,
   put: true,

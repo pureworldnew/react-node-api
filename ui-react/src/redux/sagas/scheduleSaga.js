@@ -3,7 +3,7 @@ import apiSchedules from "services/api/schedules";
 
 function* getSchedules(action) {
   try {
-    const schedules = yield call(apiSchedules.getAll);
+    const schedules = yield call(apiSchedules.getAllSearch, action.payload);
     yield put({ type: "GET_SCHEDULE_SUCCESS", schedules: schedules });
   } catch (e) {
     yield put({ type: "GET_SCHEDULE_FAILED", message: e.message });

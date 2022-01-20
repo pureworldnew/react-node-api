@@ -146,7 +146,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function ComplexSharedView({ children }) {
+export default function ComplexSharedView({ searchCompany, children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -280,6 +280,7 @@ export default function ComplexSharedView({ children }) {
           <StyledInputBase
             placeholder="Search…"
             inputProps={{ "aria-label": "search" }}
+            onChange={(e) => searchCompany(e.target.value)}
           />
         </Search>
         <Box sx={{ flexGrow: 1 }} />

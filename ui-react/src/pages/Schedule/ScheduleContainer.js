@@ -12,25 +12,21 @@ export const ScheduleContainer = () => {
   const loading = useSelector((state) => state.schedules.loading);
   const error = useSelector((state) => state.schedules.error);
   const schedules = useSelector((state) => state.schedules.schedules);
-  const [searchCompanyName, setSearchCompanyName] = useState("");
-
-  console.log("container schedules", schedules);
+  const searchCompany = useSelector((state) => state.companies.searchCompany);
 
   const [googleSignin, setGoogleSignin] = useState();
-  const [calData, setCalData] = useState([]);
   const [dateRange, setDateRange] = React.useState([
-    new Date().toUTCString(),
+    new Date(2022, 0, 1).toUTCString(),
     new Date().toUTCString(),
   ]);
   const isComponentMounted = useRef(true);
 
   useEffect(() => {
-    console.log("mounted");
-    dispatch(getSchedules());
+    dispatch(getSchedules(searchCompany));
     return () => {
       console.log("unmounted");
     };
-  }, []);
+  }, [searchCompany, dispatch]);
 
   useEffect(() => {
     if (isComponentMounted) {
