@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const db = require("./models");
-db.sequelize.sync();
+db.sequelize.sync({ alter: true });
 
 app.use(express.static("ui-react/build"));
 

@@ -18,11 +18,7 @@ export const getAllCompanys = () => {
             jobRating: "150k",
             jobReq: "test job description",
             jobSkills: "React, Node, Javascript",
-            jobWhere: "Linkedin",
-            jobHow: "Recruiter",
-            socialAccount: "China",
             regDate: "2021-09-21",
-            regWeekday: "Monday",
           },
         ]);
       }, 5000);

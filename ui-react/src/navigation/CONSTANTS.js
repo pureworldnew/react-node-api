@@ -62,29 +62,3 @@ export const JOBROLES = [
   { value: "fullstackDev", text: "Full stack Developer" },
   { value: "softwareEngineer", text: "Software Engineer" },
 ];
-
-export const JOBHOWS = [
-  { value: "recruiter", text: "Recruiter" },
-  { value: "jobBid", text: "Job Bid" },
-];
-
-export const JOBWHERES = [
-  { value: "linkedin", text: "Linkedin" },
-  { value: "angel", text: "Angel" },
-  { value: "indeed", text: "Indeed" },
-];
-
-export const WEEKDAYS = [
-  { value: "monday", text: "Mon" },
-  { value: "tuesday", text: "Tue" },
-  { value: "wednesday", text: "Wed" },
-  { value: "thursday", text: "Thu" },
-  { value: "friday", text: "Fri" },
-  { value: "saturday", text: "Sat" },
-  { value: "sunday", text: "Sun" },
-];
-
-export const SOCIALACCOUNTS = [
-  { value: "usa", text: "United States" },
-  { value: "china", text: "China" },
-];

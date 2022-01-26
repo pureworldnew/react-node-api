@@ -66,25 +66,29 @@ export const recruiterColumnsConfig = [
 ];
 
 export const companyColumnsConfig = [
-  { field: "id", headerName: "ID", width: 90 },
+  { field: "id", headerName: "No", width: 70 },
   {
     field: "companyName",
     headerName: "Name",
-    width: 150,
-    editable: true,
+    width: 500,
+    renderCell: (params) => {
+      return (
+        <a href={params.row.companyName} target="_blank" rel="noreferrer">
+          {params.row.companyName}
+        </a>
+      );
+    },
   },
   {
     field: "companySize",
     headerName: "Size",
     type: "number",
-    width: 80,
-    editable: true,
+    width: 150,
   },
   {
     field: "companyLocation",
     headerName: "Location",
     width: 150,
-    editable: true,
   },
   {
     field: "jobRole",
@@ -103,20 +107,9 @@ export const companyColumnsConfig = [
     width: 100,
   },
   {
-    field: "jobHow",
-    headerName: "How",
-    width: 100,
-  },
-  {
-    field: "jobWhere",
-    headerName: "Where",
-    width: 100,
-    editable: true,
-  },
-  {
     field: "jobReq",
     headerName: "Requirements",
-    width: 150,
+    width: 550,
     editable: true,
   },
   {
@@ -126,19 +119,9 @@ export const companyColumnsConfig = [
     editable: true,
   },
   {
-    field: "socialAccount",
-    headerName: "Account",
-    width: 100,
-  },
-  {
     field: "regDate",
     headerName: "Date",
-    width: 100,
-  },
-  {
-    field: "regWeekday",
-    headerName: "weekday",
-    width: 100,
+    width: 150,
   },
 ];
 export const scheduleColumnsConfig = [

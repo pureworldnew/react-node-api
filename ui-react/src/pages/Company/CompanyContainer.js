@@ -21,13 +21,9 @@ const companySchema = yup.object({
   jobRole: yup.string().required(),
   jobType: yup.string().required(),
   jobRating: yup.string().required(),
-  jobHow: yup.string().required(),
-  jobWhere: yup.string().required(),
   jobReq: yup.string().required(),
   jobSkills: yup.string().required(),
-  socialAccount: yup.string().required(),
   regDate: yup.string().required(),
-  regWeekday: yup.string().required(),
 });
 
 const defaultCompanyValues = {
@@ -37,13 +33,9 @@ const defaultCompanyValues = {
   jobRole: "frontendDev",
   jobType: "contract",
   jobRating: "",
-  jobHow: "recruiter",
-  jobWhere: "linkedin",
   jobReq: "",
   jobSkills: "",
-  socialAccount: "usa",
   regDate: new Date(),
-  regWeekday: "",
 };
 
 export function CompanyContainer() {
@@ -106,7 +98,12 @@ export function CompanyContainer() {
     <CompanyView
       loading={loading}
       error={error}
-      data={companies}
+      data={
+        companies &&
+        companies.map((company, index) => {
+          return { ...company, id: index + 1 };
+        })
+      }
       columns={companyColumnsConfig}
       handleClickSave={handleClickSave}
       handleClickAddOpen={handleClickAddOpen}

@@ -44,9 +44,6 @@ module.exports = {
       reg_date: {
         type: Sequelize.STRING,
       },
-      reg_weekday: {
-        type: Sequelize.STRING,
-      },
       createdAt: {
         field: "created_at",
         allowNull: false,
