@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
+import { Country, State, City } from "country-state-city";
 
 import { useForm } from "react-hook-form";
 import { Grid, MenuItem, Paper } from "@mui/material";
@@ -21,6 +22,9 @@ import { JOBROLES, JOBTYPES } from "navigation/CONSTANTS";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+
+console.log(Country.getAllCountries());
+console.log(State.getAllStates());
 
 const CompanyForm = ({
   handleClickSave,
@@ -58,6 +62,7 @@ const CompanyForm = ({
       setValue("jobSkills", selectedEditValue.jobSkills);
       setValue("jobType", selectedEditValue.jobType);
       setValue("regDate", selectedEditValue.regDate);
+      setValue("country", selectedEditValue.country);
     } else {
       setValue("companyLocation", defaultCompanyValues.companyLocation);
       setValue("companyName", defaultCompanyValues.companyName);
@@ -68,6 +73,7 @@ const CompanyForm = ({
       setValue("jobSkills", defaultCompanyValues.jobSkills);
       setValue("jobType", defaultCompanyValues.jobType);
       setValue("regDate", defaultCompanyValues.regDate);
+      setValue("country", defaultCompanyValues.country);
     }
   }, [selectedEditValue, open, setValue, defaultCompanyValues]);
 
@@ -214,7 +220,18 @@ const CompanyForm = ({
                   {errors.jobRating?.message}
                 </TypographyErrorShow>
               </Grid>
-              <Grid item xs={8}>
+              <Grid item xs={4}>
+                <FormInputText
+                  name={"jobSkills"}
+                  control={control}
+                  label="Skills"
+                  fullWidth
+                />
+                <TypographyErrorShow>
+                  {errors.jobSkills?.message}
+                </TypographyErrorShow>
+              </Grid>
+              <Grid item xs={4}>
                 <FormInputText
                   name={"jobReq"}
                   control={control}
@@ -227,17 +244,7 @@ const CompanyForm = ({
                   {errors.jobReq?.message}
                 </TypographyErrorShow>
               </Grid>
-              <Grid item xs={4}>
-                <FormInputText
-                  name={"jobSkills"}
-                  control={control}
-                  label="Skills"
-                  fullWidth
-                />
-                <TypographyErrorShow>
-                  {errors.jobSkills?.message}
-                </TypographyErrorShow>
-              </Grid>
+
               <Grid item xs={4} sx={{ textAlign: "center" }}>
                 <FormInputDate
                   name="regDate"
