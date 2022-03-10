@@ -29,7 +29,7 @@ export const RecruiterContainer = () => {
   }, [dispatch]);
 
   let mapRecruiters = [];
-  if (recruiters) {
+  if (recruiters.length) {
     mapRecruiters = recruiters.map((e) => {
       return {
         ...e,

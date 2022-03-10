@@ -271,7 +271,7 @@ export default function ComplexSharedView({ searchCompany, children }) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" noWrap component="div">
-          Interview Management Tool
+          IMT
         </Typography>
         <Search>
           <SearchIconWrapper>
